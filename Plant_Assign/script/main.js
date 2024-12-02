@@ -23,8 +23,15 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				tbody = widget.createElement('tbody', { 'id' : 'tablebody' });
 				var mainDiv = widget.createElement('div', { 'id' : 'mainDiv' });
 				
+				
 				var ssubDiv = widget.createElement('div', { 'id' : 'ssubDiv'});
 				ssubDiv.style = "display: flex; justify-content: flex-end";
+				
+				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
+				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
+				AddPlantsbutton.innerHTML = "Add Plants";
+				ssubDiv.appendChild(AddPlantsbutton);
+
 				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
 				exportbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
 				exportbutton.innerHTML = '<img src= "https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/exportImage.JPG" alt="Export Icon" /> Export';
@@ -36,7 +43,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				MassUpdatebutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
 				MassUpdatebutton.innerHTML = "Mass Update";
 				ssubDiv.appendChild(MassUpdatebutton);
-				mainDiv.appendChild(ssubDiv);
+				//mainDiv.appendChild(ssubDiv);
 
 				// Append table sections
 				Spectable.appendChild(thead);
@@ -44,6 +51,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(parttable);
 				var Spec = widget.createElement('div', { 'id' : 'Spec', 'text' : '' });
 				Spec.style = "padding-bottom: 10px;";
+				Spec.appendChild(ssubDiv);
+
 				mainDiv.appendChild(Spec);
 				mainDiv.appendChild(Spectable);
 
