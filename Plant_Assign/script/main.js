@@ -30,7 +30,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
 				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
 				AddPlantsbutton.innerHTML = "Add Plants";
-				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup());
+				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup(mainDiv));
 				ssubDiv.appendChild(AddPlantsbutton);
 
 				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
@@ -126,7 +126,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					},
 				});
 			},
-			AddPlantPopup : function(){
+			AddPlantPopup : function(mainDiv){
 				const popup = widget.createElement('div');
 				popup.id = 'popup';
 				popup.classList.add('popup');
@@ -150,6 +150,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				popupContent.appendChild(popupParagraph);
 				popup.appendChild(popupContent);
 				mainDiv.appendChild(popup);
+				widget.body.innerHTML="";
+				widget.body.appendChild(mainDiv);
+
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
 			{
