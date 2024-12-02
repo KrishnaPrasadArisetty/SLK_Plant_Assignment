@@ -1,7 +1,7 @@
 require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices"], 
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl) {
 		
-		var Spectable, parttable, thead, tbody, headerRow, partheaderRow;
+		var container,Spectable, parttable, thead, tbody, headerRow, partheaderRow;
 		var urlBASE,csrfToken,securityContext;
 
 		//securityContext= "VPLMProjectLeader.Cross-Commodity.Requirements",
@@ -17,6 +17,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	
 			onLoad: function() { 
 				// Create table elements
+				container = widget.createElement('div', { 'id' : 'container' });
 				Spectable = widget.createElement('table', { 'id' : 'spectable' });
 				parttable = widget.createElement('table', { 'id' : 'parttable' });
 				thead = widget.createElement('thead', { 'id' : 'tablehead' });
@@ -72,7 +73,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				sLastbDiv.appendChild(savebutton);
 
 				mainDiv.appendChild(sLastbDiv);
-				
+				container.appendChild(mainDiv);
 				
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
@@ -122,7 +123,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						// Append the header after the part is dropped
 						thead.appendChild(headerRow);
 						widget.body.innerHTML="";
-						widget.body.appendChild(mainDiv);
+						widget.body.appendChild(container);
 					},
 				});
 			},
@@ -149,9 +150,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				popupContent.appendChild(popupTitle);
 				popupContent.appendChild(popupParagraph);
 				popup.appendChild(popupContent);
-				mainDiv.appendChild(popup);
-				widget.body.innerHTML="";
-				widget.body.appendChild(mainDiv);
+				container.appendChild(popup);
 
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
