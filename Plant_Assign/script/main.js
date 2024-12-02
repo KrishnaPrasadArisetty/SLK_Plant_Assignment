@@ -259,7 +259,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					checkboxHeader.appendChild(checkbox);
 					headerRow.appendChild(checkboxHeader);
 				   //-----------
-					const headers = ['Specification Title','Change','Change Status','Oracle Template', 'Make/Buy','ERP Status','Sort Value'];
+					const headers = ['Plant','Change','Change Status','Oracle Template', 'Make/Buy','ERP Status','Sort Value'];
 					headers.forEach(text => {
 						const headerCol = document.createElement("th");
 						headerCol.innerText = text;
@@ -324,7 +324,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
-					select.innerHTML = '<option>Y</option><option>N</option>';
+					//select.innerHTML = '<option>Y</option><option>N</option>';
+					select.innerHTML = 'value';
 					cell.appendChild(select)
 					row.appendChild(cell);
 				});
@@ -347,7 +348,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
-					select.innerHTML = '<option>Y</option><option>N</option>';
+					//select.innerHTML = '<option>Y</option><option>N</option>';
+					select.innerHTML = 'value';
 					cell.appendChild(select)
 					row2.appendChild(cell);
 				});
