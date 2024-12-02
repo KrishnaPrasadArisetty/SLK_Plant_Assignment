@@ -318,7 +318,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//---------
 
 				const cell1 = document.createElement("td");
-				cell1.innerText = "Doc-0005";
+				cell1.innerText = "MVO";
 				row.appendChild(cell1);
 				[ 'CA-000004', 'In Work', 'template-003','make','true','2'].forEach(value => {
 					
@@ -341,7 +341,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				row2.appendChild(checkboxHeader3);
 				//------
 				const cell2 = document.createElement("td");
-				cell2.innerText = "Doc-0007";
+				cell2.innerText = "MMB";
 				row2.appendChild(cell2);
 		
 				[  'CA-000004', 'In Work', 'template-007','Buy','false','4'].forEach(value => {
