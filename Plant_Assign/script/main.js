@@ -325,8 +325,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
 					//select.innerHTML = '<option>Y</option><option>N</option>';
-					select.innerHTML = 'value';
-					cell.appendChild(select)
+					cell.innerHTML = value;
+					//cell.appendChild(select)
 					row.appendChild(cell);
 				});
 				tbody.appendChild(row);
@@ -349,8 +349,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
 					//select.innerHTML = '<option>Y</option><option>N</option>';
-					select.innerHTML = 'value';
-					cell.appendChild(select)
+					cell.innerHTML = value;
+					//cell.appendChild(select)
 					row2.appendChild(cell);
 				});
 				tbody.appendChild(row2);
