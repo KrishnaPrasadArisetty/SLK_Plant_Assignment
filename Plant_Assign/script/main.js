@@ -259,14 +259,14 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					checkboxHeader.appendChild(checkbox);
 					headerRow.appendChild(checkboxHeader);
 				   //-----------
-					const headers = ['Specification Title','Specification Revision', 'FSG Print on RT Order Required','FSG Print on Purchase Order Required','FSG Work Order Document Required','FSG Print on Work Order Required'];
+					const headers = ['Specification Title','Change','Change Status','Oracle Template', 'Make/Buy','ERP Status','Sort Value'];
 					headers.forEach(text => {
 						const headerCol = document.createElement("th");
 						headerCol.innerText = text;
 						headerRow.appendChild(headerCol);
 					});
 				}
-
+				/*
 				let urlObjWAF = urlBASE+"resources/v1/modeler/documents/parentId/";
 				urlObjWAF += sPartId;
 				urlObjWAF += "?parentRelName=SpecificationDocument";
@@ -302,9 +302,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					});
 					tbody.appendChild(row);
 				}
+				*/
 
-
-				/*
+				
 	
 				// Here, populate the tbody with rows based on the partId
 				// You can add dynamic data for rows as needed
@@ -318,9 +318,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//---------
 
 				const cell1 = document.createElement("td");
-				cell1.innerText = "Name";
+				cell1.innerText = "Doc-0005";
 				row.appendChild(cell1);
-				[ 'Att1 Value', 'Att2 Value', 'Att3 Value','Att4 Value'].forEach(value => {
+				[ 'CA-000004', 'In Work', 'template-003','make','true','2'].forEach(value => {
 					
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
@@ -340,10 +340,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				row2.appendChild(checkboxHeader3);
 				//------
 				const cell2 = document.createElement("td");
-				cell2.innerText = "Name2";
+				cell2.innerText = "Doc-0007";
 				row2.appendChild(cell2);
 		
-				[ 'Att1 Value', 'Att2 Value', 'Att3 Value','Att4 Value'].forEach(value => {
+				[  'CA-000004', 'In Work', 'template-007','Buy','false','4'].forEach(value => {
 					
 					const cell = widget.createElement("td");
 					const select = widget.createElement("select");
@@ -352,7 +352,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					row2.appendChild(cell);
 				});
 				tbody.appendChild(row2);
-				*/
+				
 				//-------------
 			},
 	
