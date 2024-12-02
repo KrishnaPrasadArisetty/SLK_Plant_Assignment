@@ -26,10 +26,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				
 				var ssubDiv = widget.createElement('div', { 'id' : 'ssubDiv'});
 				ssubDiv.style = "display: flex; justify-content: flex-end";
-				
+
 				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
 				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
 				AddPlantsbutton.innerHTML = "Add Plants";
+				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup());
 				ssubDiv.appendChild(AddPlantsbutton);
 
 				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
@@ -124,6 +125,31 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						widget.body.appendChild(mainDiv);
 					},
 				});
+			},
+			AddPlantPopup : function(){
+				const popup = widget.createElement('div');
+				popup.id = 'popup';
+				popup.classList.add('popup');
+
+				const popupContent = widget.createElement('div');
+				popupContent.classList.add('popup-content');
+				popup.style =  "display: none; position: fixed; top: 20px; right: -250px; width: 250px; height: 200px; background-color: white;border: 1px solid #ccc;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);transition: right 0.3s ease ";
+				const closePopupBtn = widget.createElement('span');
+				closePopupBtn.id = 'closePopupBtn';
+				closePopupBtn.classList.add('close');
+				closePopupBtn.innerHTML = '&times;';
+
+				const popupTitle = widget.createElement('h3');
+				popupTitle.innerText = 'Avaliable Plants';
+
+				const popupParagraph = widget.createElement('p');
+				popupParagraph.innerText = 'This is a small popup that appears on the right of the screen.';
+
+				popupContent.appendChild(closePopupBtn);
+				popupContent.appendChild(popupTitle);
+				popupContent.appendChild(popupParagraph);
+				popup.appendChild(popupContent);
+				mainDiv.appendChild(popup);
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
 			{
