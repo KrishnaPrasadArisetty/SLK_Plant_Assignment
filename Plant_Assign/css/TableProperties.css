@@ -1,0 +1,131 @@
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 8px;position:relative;
+}
+.Chooser{position: absolute;
+    bottom: -11px;
+right: -11px;}
+td {
+    text-align: center;vertical-align: middle;
+}
+tbody th,td {
+    padding:5px;
+}
+td table{margin:2px 0 25px;
+}
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+th[scope="col"] {
+    background-color: #005685;
+    color: #fff;
+	font-size: 1rem;
+}
+
+th[scope="row"] {
+    background-color: #d7d9f2;
+}
+thead{
+	text-align: center;
+    font-size: 16px;
+}
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: 1rem;
+	width:100%;
+}
+#submit{color: white;
+    background-color: #368EC4;
+}
+html input[type="text"]{
+	border:none;
+	width: 100%;
+}
+html input[type="textbox"]{
+	border-collapse: collapse;
+	padding:2px 10px;
+	}
+html input[type="button"]{
+	margin:10px 10px 10px 0;
+	white-space: nowrap;
+    padding: 5px 8px;border: 1px solid #b4b6ba;-webkit-border-radius: 2px;
+}
+
+label {
+	white-space:nowrap;
+	font-family: sans-serif;
+	font-weight: bold;
+	color:#77797c;
+}
+.delete{
+	 background-color:#DA4453;color:#fff;padding:0px 8px !important;
+}
+
+.dropdown {
+	font-family: sans-serif;
+	font-size: 1rem;
+	border-collapse: collapse;
+	padding: 4px 10px
+}
+i.delete{background-color:unset;color: #DA4453;font-size: 14px;
+}
+#tableContainer{margin: 8px 0;
+}
+#mainDiv
+{margin: 5px;
+text-align:left
+}
+
+.inlinediv {
+	align-items:center;
+	display:inline-flex;
+}
+.module, .moduleWrapper, .moduleContent {
+    overflow-y: auto;
+}
+.EDF_Tools_Required_Quantity{width:30px !important}
+/*Added for NNBPLM-22115 Start*/
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+ 
+ top: calc(50% - 25px);
+    left: calc(50% - 45px);
+    position: absolute;
+    display: block;
+	z-index: 9;
+}
+.hidden{
+	 display: none;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.disable{
+    cursor: not-allowed !important;
+	opacity: 0.6;
+}
+/*Added for NNBPLM-22115 End*/
