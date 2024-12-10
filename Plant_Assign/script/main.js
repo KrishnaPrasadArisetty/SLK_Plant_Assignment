@@ -76,9 +76,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("66666-111--->"+whereUsedTable.showTable(""));
 				//whereUsedTable.tableData;
 				
-				console.log("66666---->"+whereUsedTable.tableData);
-				console.log("66666---->"+widget.body.querySelector('example-table'));
-				
 				
 				
 				// Create a dropbox for drag-and-drop functionality
@@ -94,7 +91,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				button.innerHTML = 'Open content';
 				dropbox.append(button);
 				dropbox.style = "border:2px #c6c5c5 dashed; margin:10px; padding: 5%; text-align: center";
-				widget.body.innerHTML="";
+				//widget.body.innerHTML="";
 				dropbox.inject(widget.body);
 				//
 				comWidget.setBaseURL();
