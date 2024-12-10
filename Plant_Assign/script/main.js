@@ -76,7 +76,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//whereUsedTable.tableData;
 				
 				console.log("66666---->"+whereUsedTable.tableData);
-				container.appendChild(whereUsedTable.tableData);
+				console.log("66666---->"+widget.body.querySelector('example-table'));
+				
+				
 				
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
