@@ -52,10 +52,8 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
 
                 ],
             });
-            console.log("33333---->");
             whereUsedTable.tableData = table;
-            return table;
-            console.log("44444444---->");
+            widget.body.appendChild(table);
         }
     };
     widget.whereUsedTable = whereUsedTable;
