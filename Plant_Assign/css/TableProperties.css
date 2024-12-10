@@ -58,7 +58,7 @@ html input[type="textbox"]{
 html input[type="button"]{
 	margin:10px 10px 10px 0;
 	white-space: nowrap;
-    padding: 5px 8px;border: 1px solid #b4b6ba;-webkit-border-radius: 2px;
+    padding: 5px 8px;border: 1px solid #b4b6ba; -webkit-border-radius: 2px;
 }
 
 label {
@@ -128,4 +128,31 @@ text-align:left
     cursor: not-allowed !important;
 	opacity: 0.6;
 }
-/*Added for NNBPLM-22115 End*/
+
+/*----*/
+
+.tabulator {
+    width: 99%;
+    margin: auto;
+}
+
+.tableToobarDiv{
+    width: 99%;
+    margin: auto;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    gap: 10px; /* Add space between flex items */
+}
+
+
+.tabulator .tabulator-header .tabulator-col{
+    background: #f1f1f1;
+}
+
+.tabulator{
+    border: none !important;
+}
+.tabulator-row .tabulator-cell.tabulator-row-header{
+    background: #f1f1f1;
+}

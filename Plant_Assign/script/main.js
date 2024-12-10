@@ -1,12 +1,9 @@
-require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices"], 
-	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl) {
+require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices","script/table"], 
+	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var container,Spectable, parttable, thead, tbody, headerRow, partheaderRow;
 		var urlBASE,csrfToken,securityContext;
-
-		//securityContext= "VPLMProjectLeader.Cross-Commodity.Requirements",
-		//SecurityContext: "ctx%3A%3AVPLMProjectLeader.BU-0000001.Rosemount%20Flow",
-
+		
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Rosemount%20Flow",
 		//urlBASE = "https://oi000186152-us1-space.3dexperience.3ds.com/enovia/";
 		urlBASE = "";
@@ -74,6 +71,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
+				container.appendChild(whereUsedTable.showTable(""));
 				
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
