@@ -122,8 +122,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						
 						// Append the header after the part is dropped
 						thead.appendChild(headerRow);
-
-						console.log("qqqqqwhereused======="+whereUsedTable.showTable("1,2,3,4"));
+						var tab = whereUsedTable.showTable("");
+						console.log("qqqqqwhereused======="+tab);
 						widget.body.innerHTML="";
 						widget.body.appendChild(container);
 					},
