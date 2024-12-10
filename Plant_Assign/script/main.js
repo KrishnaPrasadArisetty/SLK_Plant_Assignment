@@ -72,7 +72,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
 				console.log("5555---->");
-				container.appendChild(whereUsedTable.showTable(""));
+				container.appendChild(()=>{whereUsedTable.showTable("");
+					console.log("5555--111111-->")
+				});
 				console.log("66666---->");
 				
 				// Create a dropbox for drag-and-drop functionality
