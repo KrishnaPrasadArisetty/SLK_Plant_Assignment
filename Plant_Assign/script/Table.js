@@ -12,7 +12,7 @@ require.config({
     }
 });
 
-define("script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar) {
+define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar) {
 
     var whereUsedTable = {
         showTable: function (data) {

@@ -1,4 +1,4 @@
-require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices","script/table"], 
+require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices","Plant/script/table"], 
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var container,Spectable, parttable, thead, tbody, headerRow, partheaderRow;
