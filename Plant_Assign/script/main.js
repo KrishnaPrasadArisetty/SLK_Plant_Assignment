@@ -71,12 +71,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
-				console.log("5555--mmm-->");
-				
-				console.log("66666-111--->"+whereUsedTable.showTable(""));
-				//whereUsedTable.tableData;
-				
-				
 				
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
@@ -91,7 +85,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				button.innerHTML = 'Open content';
 				dropbox.append(button);
 				dropbox.style = "border:2px #c6c5c5 dashed; margin:10px; padding: 5%; text-align: center";
-				//widget.body.innerHTML="";
+				widget.body.innerHTML="";
 				dropbox.inject(widget.body);
 				//
 				comWidget.setBaseURL();
@@ -125,8 +119,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						
 						// Append the header after the part is dropped
 						thead.appendChild(headerRow);
-						var tab = whereUsedTable.showTable("");
-						console.log("qqqqqwhereused======="+tab);
+
 						widget.body.innerHTML="";
 						widget.body.appendChild(container);
 					},
