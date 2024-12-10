@@ -60,7 +60,9 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
 
                 ],
             });
+            console.log("33333---->");
             whereUsedTable.tableData = table;
+            console.log("44444444---->");
         }
     };
     widget.whereUsedTable = whereUsedTable;
