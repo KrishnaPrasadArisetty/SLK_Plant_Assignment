@@ -49,14 +49,6 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                     { title: "Title", field: "title" },
                     { title: "Description", field: "description", width: 300, resizable: true },
                     { title: "Type", field: "type" },
-                    { title: "Revision", field: "revision" },
-                    { title: "Connected Child Revision", field: "connectedcCildRev" },
-                    { title: "Latest child connected", field: "isLatestRevision", formatter: "tickCross" },
-                    { title: "To-Be child connected", field: "toBeRevision", },
-                    { title: "Maturity State", field: "state" },
-                    { title: "Owner", field: "owner" },
-                    { title: "CAD Format", field: "cadorigin" },
-                    { title: "Collabspace", field: "collabspace" }
 
                 ],
             });
