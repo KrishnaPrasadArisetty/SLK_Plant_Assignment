@@ -72,10 +72,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
 				console.log("5555--mmm-->");
-			//whereUsedTable.showTable("");
-			whereUsedTable.tableData;
+				//whereUsedTable.showTable("");
+				//whereUsedTable.tableData;
 				
-				console.log("66666---->");
+				console.log("66666---->"+whereUsedTable.tableData);
 				
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
