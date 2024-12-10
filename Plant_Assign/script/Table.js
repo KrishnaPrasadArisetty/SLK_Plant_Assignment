@@ -61,9 +61,6 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 ],
             });
             whereUsedTable.tableData = table;
-            tableToolbar.showToolbar(table);
-
-
         }
     };
     widget.whereUsedTable = whereUsedTable;
