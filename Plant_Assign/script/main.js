@@ -72,9 +72,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
 				console.log("5555---->");
-				container.appendChild(()=>{whereUsedTable.showTable("");
-					console.log("5555--111111-->")
-				});
+				
 				console.log("66666---->");
 				
 				// Create a dropbox for drag-and-drop functionality
@@ -124,6 +122,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						
 						// Append the header after the part is dropped
 						thead.appendChild(headerRow);
+
+						container.appendChild(()=>{whereUsedTable.showTable("");
+							console.log("5555--111111-->")
+						});
 						widget.body.innerHTML="";
 						widget.body.appendChild(container);
 					},
