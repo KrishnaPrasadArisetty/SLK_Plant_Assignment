@@ -53,7 +53,6 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 ],
             });
             whereUsedTable.tableData = table;
-            widget.body.appendChild(table);
         }
     };
     widget.whereUsedTable = whereUsedTable;
