@@ -71,7 +71,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				mainDiv.appendChild(sLastbDiv);
 				container.appendChild(mainDiv);
-				console.log("5555---->");
+				console.log("5555--mmm-->");
 			//whereUsedTable.showTable("");
 			container.appendChild(whereUsedTable.tableData);
 				
