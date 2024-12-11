@@ -280,7 +280,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.appendChild(container);
 			},
 			getLibClassDetails: function(sLibId) {
-				let ClassTableData = "";
+				let ALLClasses = "";
 				//Call web service--
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
@@ -299,10 +299,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
 									console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
-									let childclassDetails = comWidget.getClassAttributes(subChildClass.id);
-									if(childclassDetails.status) {
-										console.log("insdie chidl class details===>"+childclassDetails.status);
-									}
+									
+									ALLClasses.classes.push({"id":subChildClass.id});
 								});
 								}
 							});
@@ -310,7 +308,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						});
 					}
 				}
-				return ClassTableData;
+				console.log("ALLClasses:", ALLClasses); 
+				return ALLClasses;
 			},
 			getClassAttributes: function(sClassId) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Class/";
@@ -319,9 +318,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
-				console.log("Creating spec table for PartId:", sPartId);
+				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = "";
-
+				let ALLClasses = "";
 				//Need to update proper Collbspace anme in future
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
@@ -329,7 +328,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const lib_Details = LibDetails.output
 					const sLibId = lib_Details.member[0].id;
 					console.log("lib_id===="+sLibId);
-					ClassTableData = comWidget.getLibClassDetails(sLibId);
+					ALLClasses = comWidget.getLibClassDetails(sLibId);
+					console.log("ALLClasses===="+ALLClasses);
 				}
 
 
