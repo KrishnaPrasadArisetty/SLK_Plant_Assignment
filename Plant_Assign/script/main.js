@@ -223,7 +223,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				
 				
 				var ssubDiv = widget.createElement('div', { 'id' : 'ssubDiv'});
-				ssubDiv.style = "display: flex; justify-content: flex-end";
+				ssubDiv.style = "display: flex; justify-content: flex-start";
 
 				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
 				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
