@@ -279,25 +279,32 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
 			},
-	
+			getLibClassDetails: function(sLibId) {
+				let ClassTableData = "";
+				return ClassTableData;
+			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating spec table for PartId:", sPartId);
+				let ClassTableData = "";
 
+				//Need to update proper Collbspace anme in future
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
 				//urlObjWAF += sPartId;
 				//urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"")
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output
-					console.log("lib_id===="+lib_Details.member[0].id);
+					const sLibId = lib_Details.member[0].id;
+					console.log("lib_id===="+sLibId);
+					ClassTableData = getLibClassDetails(sLibId);
 				}
 
 
-				var tabledata = [
+				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
 				];
-				mainDiv.appendChild(whereUsedTable.showTable(tabledata));
+				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData));
 					
 
 				/*
