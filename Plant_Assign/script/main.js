@@ -269,6 +269,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(classtable);
 
 				container.appendChild(mainDiv);
+				container.appendChild(whereUsedTable.showTable(""));
 
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
