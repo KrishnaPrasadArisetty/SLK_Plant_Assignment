@@ -269,7 +269,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(classtable);
 
 				container.appendChild(mainDiv);
-				container.appendChild(whereUsedTable.showTable(""));
+				var tabledata = [
+					{id:1, Plant:"MVO", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", Make_Buy:"make", ERPStatus:"true", SortValue:"1"},
+					{id:1, Plant:"MMB", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", Make_Buy:"buy", ERPStatus:"false", SortValue:"3"},
+				];
+				container.appendChild(whereUsedTable.showTable(tabledata));
 
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);

@@ -45,10 +45,14 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 },
                 layout: "fitData",
                 columns: [
-                    { title: "EIN", field: "partNumber" },
-                    { title: "Title", field: "title" },
-                    { title: "Description", field: "description", width: 300, resizable: true },
-                    { title: "Type", field: "type" },
+                    { title: "Plant", field: "Plant" },
+                    { title: "Change", field: "Change" },
+                    { title: "Change Status", field: "ChangeStatus" },
+                    { title: "Oracle Template", field: "OracleTemplate" },
+                    { title: "Make/Buy", field: "Make_Buy" },
+                    { title: "ERP Status", field: "ERPStatus" },
+                    { title: "Sort Value", field: "SortValue" },
+                    
 
                 ],
             });
