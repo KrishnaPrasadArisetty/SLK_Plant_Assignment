@@ -289,7 +289,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(LibClassDetails.status) {
 					const lib_Classes = LibClassDetails.output
 					//const sLibId = lib_Classes.member[0].id;
-					console.log("lib_Classes==="+lib_Classes);
+					console.log("lib_Classes==="+lib_Classes.member);
 				}
 				return ClassTableData;
 			},
