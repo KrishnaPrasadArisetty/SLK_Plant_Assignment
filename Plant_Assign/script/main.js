@@ -1,79 +1,17 @@
 require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS/WAFData/WAFData", "DS/i3DXCompassServices/i3DXCompassServices","Plant/script/table"], 
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
-		var container,Spectable, parttable, thead, tbody, headerRow, partheaderRow;
 		var urlBASE,csrfToken,securityContext;
 		
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Rosemount%20Flow",
-		//urlBASE = "https://oi000186152-us1-space.3dexperience.3ds.com/enovia/";
 		urlBASE = "";
 
-
 		var comWidget = {
-			widgetDataSelected: {},
-	
+
 			onLoad: function() { 
-				// Create table elements
-				container = widget.createElement('div', { 'id' : 'container' });
-				Spectable = widget.createElement('table', { 'id' : 'spectable' });
-				parttable = widget.createElement('table', { 'id' : 'parttable' });
-				thead = widget.createElement('thead', { 'id' : 'tablehead' });
-				tbody = widget.createElement('tbody', { 'id' : 'tablebody' });
-				var mainDiv = widget.createElement('div', { 'id' : 'mainDiv' });
-				
-				
-				var ssubDiv = widget.createElement('div', { 'id' : 'ssubDiv'});
-				ssubDiv.style = "display: flex; justify-content: flex-end";
-
-				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
-				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
-				AddPlantsbutton.innerHTML = "Add Plants";
-				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup(mainDiv));
-				ssubDiv.appendChild(AddPlantsbutton);
-
-				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
-				exportbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
-				exportbutton.innerHTML = '<img src= "https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/exportImage.JPG" alt="Export Icon" /> Export';
-				var img = exportbutton.querySelector('img');
-				img.style = "height : 20px ";
-				exportbutton.addEventListener('click', () => comWidget.exportTable('Part_Spec_BossAtt.csv'));
-				ssubDiv.appendChild(exportbutton);
-				var MassUpdatebutton = document.createElement('button', {'class':'dynamic-button'});
-				MassUpdatebutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
-				MassUpdatebutton.innerHTML = "Mass Update";
-				ssubDiv.appendChild(MassUpdatebutton);
-				//mainDiv.appendChild(ssubDiv);
-
-				// Append table sections
-				Spectable.appendChild(thead);
-				Spectable.appendChild(tbody);
-				mainDiv.appendChild(parttable);
-				var Spec = widget.createElement('div', { 'id' : 'Spec', 'text' : '' });
-				Spec.style = "padding-bottom: 10px;";
-				Spec.appendChild(ssubDiv);
-
-				mainDiv.appendChild(Spec);
-				mainDiv.appendChild(Spectable);
-
-				var sLastbDiv = widget.createElement('div', { 'id' : 'sLastbDiv'});
-				sLastbDiv.style = "display: flex; justify-content: flex-end";
-
-				var clearbutton = document.createElement('button', {'class':'dynamic-button'});
-				clearbutton.style = "border-radius: 4px; padding: 5px 20px; font-size: 12px; text-align: center; margin: 10px; background-color: #368ec4; color: white; border: none; cursor: pointer";
-				clearbutton.innerHTML = 'clear';
-				clearbutton.addEventListener('click', comWidget.onLoad);
-				sLastbDiv.appendChild(clearbutton);
-
-				var savebutton = document.createElement('button', {'class':'dynamic-button'});
-				savebutton.style = "border-radius: 4px; padding: 5px 20px; font-size: 12px; text-align: center; margin: 10px; background-color: #368ec4; color: white; border: none; cursor: pointer";
-				savebutton.innerHTML = 'save';
-				sLastbDiv.appendChild(savebutton);
-
-				mainDiv.appendChild(sLastbDiv);
-				container.appendChild(mainDiv);
-				
+								
 				// Create a dropbox for drag-and-drop functionality
-				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : '' });
+				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : ''});
 				var dropimage = widget.createElement('img', { 'src': 'https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/dropImage.png', 'alt': 'Dropbox Image' });
 				dropbox.append(dropimage);
 				var dropboxsep = widget.createElement('div', { 'class' : 'dropboxsep', 'text' : '-- or --' });
@@ -117,11 +55,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("partTitle---->", partTitle);
 						comWidget.partDropped(PartId,partName,partTitle);
 						
-						// Append the header after the part is dropped
-						thead.appendChild(headerRow);
+						
 
-						widget.body.innerHTML="";
-						widget.body.appendChild(container);
+						
 					},
 				});
 			},
@@ -277,30 +213,84 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			partDropped: function(sPartId,partName,partTitle) { 
 				console.log("PartId dropped:", sPartId);
-				comWidget.specTable(sPartId);  // Populate the spec table with data
-				comWidget.partTable(sPartId,partName,partTitle);  // Populate the part table with data
+				comWidget.CreateScreen(sPartId,partName,partTitle);
+			},
+			CreateScreen: function(sPartId,partName,partTitle) { 
+				var container = widget.createElement('div', { 'id' : 'container' });
+				var classtable = widget.createElement('table', { 'id' : 'classtable' });
+				var parttable = widget.createElement('table', { 'id' : 'parttable' });
+				var mainDiv = widget.createElement('div', { 'id' : 'mainDiv' });
+				
+				
+				var ssubDiv = widget.createElement('div', { 'id' : 'ssubDiv'});
+				ssubDiv.style = "display: flex; justify-content: flex-end";
+
+				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
+				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
+				AddPlantsbutton.innerHTML = "Add Plants";
+				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup(mainDiv));
+				ssubDiv.appendChild(AddPlantsbutton);
+
+				var clearbutton = document.createElement('button', {'class':'dynamic-button'});
+				clearbutton.style = "border-radius: 4px; padding: 5px 20px; font-size: 12px; text-align: center; margin: 10px; background-color: #368ec4; color: white; border: none; cursor: pointer";
+				clearbutton.innerHTML = 'clear';
+				clearbutton.addEventListener('click', comWidget.onLoad);
+				ssubDiv.appendChild(clearbutton);
+
+				var savebutton = document.createElement('button', {'class':'dynamic-button'});
+				savebutton.style = "border-radius: 4px; padding: 5px 20px; font-size: 12px; text-align: center; margin: 10px; background-color: #368ec4; color: white; border: none; cursor: pointer";
+				savebutton.innerHTML = 'save';
+				ssubDiv.appendChild(savebutton);
+
+				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
+				exportbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
+				exportbutton.innerHTML = '<img src= "https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/exportImage.JPG" alt="Export Icon" /> Export';
+				var img = exportbutton.querySelector('img');
+				img.style = "height : 20px ";
+				exportbutton.addEventListener('click', () => comWidget.exportTable('Part_Spec_BossAtt.csv'));
+				ssubDiv.appendChild(exportbutton);
+
+				var MassUpdatebutton = document.createElement('button', {'class':'dynamic-button'});
+				MassUpdatebutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
+				MassUpdatebutton.innerHTML = "Mass Update";
+				ssubDiv.appendChild(MassUpdatebutton);
+
+				//Call part and class table creation functions
+				
+				comWidget.partTable(sPartId,partName,partTitle,parttable);  // Populate the part table with data
+				comWidget.classTable(sPartId,classtable);  // Populate the spec table with data
+
+				
+
+				// Append table sections
+				mainDiv.appendChild(parttable);
+				mainDiv.appendChild(ssubDiv);
+
+				mainDiv.appendChild(classtable);
+
+				container.appendChild(mainDiv);
+
+				widget.body.innerHTML="";
+				widget.body.appendChild(container);
 			},
 	
-			specTable: function(sPartId) {
+			classTable: function(sPartId,classtable) {
 				console.log("Creating spec table for PartId:", sPartId);
-
-				// Create header row for specification table if not already created
-				if (!headerRow) {
-					headerRow = document.createElement("tr");
+				
 					// Create and append the checkbox column
 					const checkboxHeader = document.createElement("th");
 					const checkbox = document.createElement("input");
 					checkbox.type = "checkbox";
 					checkboxHeader.appendChild(checkbox);
-					headerRow.appendChild(checkboxHeader);
+					classtable.appendChild(checkboxHeader);
 				   //-----------
 					const headers = ['Plant','Change','Change Status','Oracle Template', 'Make/Buy','ERP Status','Sort Value'];
 					headers.forEach(text => {
 						const headerCol = document.createElement("th");
 						headerCol.innerText = text;
-						headerRow.appendChild(headerCol);
+						classtable.appendChild(headerCol);
 					});
-				}
+
 				/*
 				let urlObjWAF = urlBASE+"resources/v1/modeler/documents/parentId/";
 				urlObjWAF += sPartId;
@@ -335,7 +325,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						cell.appendChild(select)
 						row.appendChild(cell);
 					});
-					tbody.appendChild(row);
+					classtable.appendChild(row);
 				}
 				*/
 
@@ -364,7 +354,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					//cell.appendChild(select)
 					row.appendChild(cell);
 				});
-				tbody.appendChild(row);
+				classtable.appendChild(row);
 
 				//---------------
 				const row2 = document.createElement("tr");
@@ -388,36 +378,30 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					//cell.appendChild(select)
 					row2.appendChild(cell);
 				});
-				tbody.appendChild(row2);
+				classtable.appendChild(row2);
 				
 				//-------------
 			},
 	
-			partTable: function(sPartId,partName,partTitle) { 
+			partTable: function(sPartId,partName,partTitle,parttable) { 
 	
-				// Create header row for part table if not already created
-				if (!partheaderRow) {
-					partheaderRow = document.createElement("tr", { 'id': 'partheaderRow' });
 					const headers = ['Part Names', 'Title'];
 					headers.forEach(text => {
 						const headerCol = document.createElement("th");
 						headerCol.innerText = text;
-						partheaderRow.appendChild(headerCol);
+						parttable.appendChild(headerCol);
 					});
-				}
-				var partDetailsRow;
-				if (!partDetailsRow) {
-					partDetailsRow = document.createElement("tr", { 'id': 'partDetailsRow' });
-					const headers = [partName,partTitle];
-					headers.forEach(text => {
+				
+					const head2 = [partName,partTitle];
+					head2.forEach(text => {
 						const headerCol = document.createElement("th");
 						headerCol.innerText = text;
-						partDetailsRow.appendChild(headerCol);
+						parttable.appendChild(headerCol);
 					});
-				}
-				parttable.appendChild(partheaderRow);
-				parttable.appendChild(partDetailsRow);
+				
 	
+			},
+			AddProductCard : function (){
 			},
 			connectBase : function (){
 				 
