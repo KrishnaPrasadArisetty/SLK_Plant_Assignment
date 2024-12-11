@@ -51,9 +51,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						
 						let partName = dataResp3.member[0].name;
 						let partTitle = dataResp3.member[0].title;
+						let partCollabSpace  = dataResp3.member[0].collabspace;
 						console.log("partName---->", partName);
 						console.log("partTitle---->", partTitle);
-						comWidget.partDropped(PartId,partName,partTitle);
+						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);
 						
 						
 
@@ -93,7 +94,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					SecurityContext: securityContext,
 					Accept: "application/json"
 				};
-				let kp;
+				let returnobj = {};
 				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
 					method: methodWAF,
 					headers: headerWAF,
@@ -101,17 +102,19 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					type: "json",
 					async : false,
 					onComplete: function(dataResp) {
-						kp=dataResp;
-						console.log("kp--CallWebService--- >> ",kp);
+						returnobj.status = true;
+						returnobj.output = dataResp;
+						console.log("kp--CallWebService--- >> ",dataResp);
 					},
 					onFailure: function(error, backendresponse, response_hdrs) {
 						console.log(backendresponse);
+						returnobj.status = false;
 						console.log(response_hdrs);
 						widget.body.innerHTML += "<p>Something Went Wrong"+error+"</p>";
 					}
 				})
 				
-				return kp;
+				return returnobj;
 			},
 			exportTable: function(filename){
 				
@@ -211,13 +214,12 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				})
 				return dataRespTC;
 			},
-			partDropped: function(sPartId,partName,partTitle) { 
+			partDropped: function(sPartId,partName,partTitle,partCollabSpace) { 
 				console.log("PartId dropped:", sPartId);
-				comWidget.CreateScreen(sPartId,partName,partTitle);
+				comWidget.CreateScreen(sPartId,partName,partTitle,partCollabSpace);
 			},
-			CreateScreen: function(sPartId,partName,partTitle) { 
+			CreateScreen: function(sPartId,partName,partTitle,partCollabSpace) { 
 				var container = widget.createElement('div', { 'id' : 'container' });
-				var classtable = widget.createElement('table', { 'id' : 'classtable' });
 				var parttable = widget.createElement('table', { 'id' : 'parttable' });
 				var mainDiv = widget.createElement('div', { 'id' : 'mainDiv' });
 				
@@ -263,7 +265,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				mainDiv.appendChild(ssubDiv);
 
 
-				comWidget.classTable(sPartId,mainDiv);  // Populate the spec table with data
+				comWidget.classTable(sPartId,partCollabSpace,mainDiv);  // Populate the spec table with data
 
 
 				container.appendChild(mainDiv);
@@ -278,9 +280,18 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.appendChild(container);
 			},
 	
-			classTable: function(sPartId,mainDiv) {
+			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating spec table for PartId:", sPartId);
-				
+
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
+				//urlObjWAF += sPartId;
+				//urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
+				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"")
+				if(LibDetails.status) {
+					const lib_id = LibDetails.output
+					console.log("lib_id===="+lib_id);
+				}
+
 
 				var tabledata = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
