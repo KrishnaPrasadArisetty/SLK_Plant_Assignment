@@ -283,8 +283,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				
 
 				var tabledata = [
-					{id:1, Plant:"MVO", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", Make_Buy:"make", ERPStatus:"true", SortValue:"1"},
-					{id:1, Plant:"MMB", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", Make_Buy:"buy", ERPStatus:"false", SortValue:"3"},
+					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
+					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
 				];
 				mainDiv.appendChild(whereUsedTable.showTable(tabledata));
 					

@@ -46,12 +46,18 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 layout: "fitData",
                 columns: [
                     { title: "Plant", field: "Plant" },
+                    { title: "Seq", field: "Seq" },
+                    { title: "Status", field: "Status" },
+                    { title: "MFG Change", field: "MFG_Change" },
+                    { title: "MFG Status", field: "MFG_Status" },
                     { title: "Change", field: "Change" },
-                    { title: "Change Status", field: "ChangeStatus" },
-                    { title: "Oracle Template", field: "OracleTemplate" },
+                    { title: "Change Status", field: "Change_Status" },
+                    { title: "Oracle Template", field: "Oracle_Template" },
+                    { title: "ERP Status", field: "ERP_Status" }, 
+                    { title: "ERP Export", field: "ERP_Export" },
+                    { title: "Lead Plant", field: "Lead_Plant" },
                     { title: "Make/Buy", field: "Make_Buy" },
-                    { title: "ERP Status", field: "ERPStatus" },
-                    { title: "Sort Value", field: "SortValue" }
+                    { title: "Sort Value", field: "Sort_Value" }
                 ],
             });
             whereUsedTable.tableData = table;
