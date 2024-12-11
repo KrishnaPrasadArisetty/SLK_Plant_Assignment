@@ -285,31 +285,38 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
 				urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
-				let LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"")
+				let LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 				if(LibClassDetails.status) {
 					const lib_Classes = LibClassDetails.output
-					//const sLibId = lib_Classes.member[0].id;
-					console.log("lib_Classes==="+lib_Classes.member);
-					// Loop through the top-level member
-					lib_Classes.member.forEach(library => {
-						console.log("Library: ", library.name);  // Log the library name
-						
-						// Check if the library has ChildClasses
-						if (library.ChildClasses && library.ChildClasses.member) {
-						library.ChildClasses.member.forEach(childClass => {
-							console.log("  Child Class: ", childClass.name);  // Log the child class name
-							
-							// Check for any further nested ChildClasses in each childClass
-							if (childClass.ChildClasses && childClass.ChildClasses.member) {
-							childClass.ChildClasses.member.forEach(subChildClass => {
-								console.log("    Sub Child Class: ", subChildClass.name);  // Log the sub-child class name
+					if (lib_Classes.member) {
+						lib_Classes.member.forEach(library => {
+							console.log("Library:", library.name);  // Log the library name
+							// Check if the library has ChildClasses
+							if (library.ChildClasses && library.ChildClasses.member) {
+							library.ChildClasses.member.forEach(childClass => {
+								console.log("Child Class:", childClass.title);  // Log the child class name
+								// Check for any further nested ChildClasses in each childClass
+								if (childClass.ChildClasses && childClass.ChildClasses.member) {
+								childClass.ChildClasses.member.forEach(subChildClass => {
+									console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
+									let childclassDetails = comWidget.getClassAttributes(subChildClass.id);
+									if(childclassDetails.status) {
+										console.log("insdie chidl class details===>"+childclassDetails.status);
+									}
+								});
+								}
 							});
 							}
 						});
-						}
-					});
+					}
 				}
 				return ClassTableData;
+			},
+			getClassAttributes: function(sClassId) {
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Class/";
+				urlObjWAF += sClassId;
+				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
+				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating spec table for PartId:", sPartId);
@@ -317,7 +324,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				//Need to update proper Collbspace anme in future
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
-				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"")
+				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output
 					const sLibId = lib_Details.member[0].id;
