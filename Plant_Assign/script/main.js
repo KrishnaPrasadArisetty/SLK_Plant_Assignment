@@ -280,7 +280,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.appendChild(container);
 			},
 			getLibClassDetails: function(sLibId) {
-				let ALLClasses = {"classes" :[]};
+				let ALLClasses = { "classes": [] };
 				//Call web service--
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
@@ -299,6 +299,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
 									console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
+									console.log("--ALLClasses.classes-----:", ALLClasses.classes); 
 									ALLClasses.classes.push({"id":subChildClass.id});
 								});
 								}
