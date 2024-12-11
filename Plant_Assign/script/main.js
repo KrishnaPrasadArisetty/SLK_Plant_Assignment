@@ -258,43 +258,36 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//Call part and class table creation functions
 				
 				comWidget.partTable(sPartId,partName,partTitle,parttable);  // Populate the part table with data
-				comWidget.classTable(sPartId,classtable);  // Populate the spec table with data
 
-				
-
-				// Append table sections
 				mainDiv.appendChild(parttable);
 				mainDiv.appendChild(ssubDiv);
 
-				mainDiv.appendChild(classtable);
+
+				comWidget.classTable(sPartId,mainDiv);  // Populate the spec table with data
+
 
 				container.appendChild(mainDiv);
+				/*
 				var tabledata = [
 					{id:1, Plant:"MVO", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", Make_Buy:"make", ERPStatus:"true", SortValue:"1"},
 					{id:1, Plant:"MMB", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", Make_Buy:"buy", ERPStatus:"false", SortValue:"3"},
 				];
 				container.appendChild(whereUsedTable.showTable(tabledata));
-
+				*/
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
 			},
 	
-			classTable: function(sPartId,classtable) {
+			classTable: function(sPartId,mainDiv) {
 				console.log("Creating spec table for PartId:", sPartId);
 				
-					// Create and append the checkbox column
-					const checkboxHeader = document.createElement("th");
-					const checkbox = document.createElement("input");
-					checkbox.type = "checkbox";
-					checkboxHeader.appendChild(checkbox);
-					classtable.appendChild(checkboxHeader);
-				   //-----------
-					const headers = ['Plant','Change','Change Status','Oracle Template', 'Make/Buy','ERP Status','Sort Value'];
-					headers.forEach(text => {
-						const headerCol = document.createElement("th");
-						headerCol.innerText = text;
-						classtable.appendChild(headerCol);
-					});
+
+				var tabledata = [
+					{id:1, Plant:"MVO", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", Make_Buy:"make", ERPStatus:"true", SortValue:"1"},
+					{id:1, Plant:"MMB", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", Make_Buy:"buy", ERPStatus:"false", SortValue:"3"},
+				];
+				mainDiv.appendChild(whereUsedTable.showTable(tabledata));
+					
 
 				/*
 				let urlObjWAF = urlBASE+"resources/v1/modeler/documents/parentId/";
@@ -335,57 +328,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				*/
 
 				
-	
-				// Here, populate the tbody with rows based on the partId
-				// You can add dynamic data for rows as needed
-				const row = document.createElement("tr");
-				// Create and append the checkbox column
-				const checkboxHeader2 = document.createElement("th");
-				const checkbox2 = document.createElement("input");
-				checkbox2.type = "checkbox";
-				checkboxHeader2.appendChild(checkbox2);
-				row.appendChild(checkboxHeader2);
-				//---------
-
-				const cell1 = document.createElement("td");
-				cell1.innerText = "MVO";
-				row.appendChild(cell1);
-				[ 'CA-000004', 'In Work', 'template-003','make','true','2'].forEach(value => {
-					
-					const cell = widget.createElement("td");
-					const select = widget.createElement("select");
-					//select.innerHTML = '<option>Y</option><option>N</option>';
-					cell.innerHTML = value;
-					//cell.appendChild(select)
-					row.appendChild(cell);
-				});
-				classtable.appendChild(row);
-
-				//---------------
-				const row2 = document.createElement("tr");
-				// Create and append the checkbox column
-				const checkboxHeader3 = document.createElement("th");
-				const checkbox3 = document.createElement("input");
-				checkbox3.type = "checkbox";
-				checkboxHeader3.appendChild(checkbox3);
-				row2.appendChild(checkboxHeader3);
-				//------
-				const cell2 = document.createElement("td");
-				cell2.innerText = "MMB";
-				row2.appendChild(cell2);
-		
-				[  'CA-000004', 'In Work', 'template-007','Buy','false','4'].forEach(value => {
-					
-					const cell = widget.createElement("td");
-					const select = widget.createElement("select");
-					//select.innerHTML = '<option>Y</option><option>N</option>';
-					cell.innerHTML = value;
-					//cell.appendChild(select)
-					row2.appendChild(cell);
-				});
-				classtable.appendChild(row2);
-				
-				//-------------
 			},
 	
 			partTable: function(sPartId,partName,partTitle,parttable) { 
