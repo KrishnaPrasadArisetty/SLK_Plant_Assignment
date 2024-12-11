@@ -290,6 +290,24 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const lib_Classes = LibClassDetails.output
 					//const sLibId = lib_Classes.member[0].id;
 					console.log("lib_Classes==="+lib_Classes.member);
+					// Loop through the top-level member
+					lib_Classes.member.forEach(library => {
+						console.log("Library: ", library.name);  // Log the library name
+						
+						// Check if the library has ChildClasses
+						if (library.ChildClasses && library.ChildClasses.member) {
+						library.ChildClasses.member.forEach(childClass => {
+							console.log("  Child Class: ", childClass.name);  // Log the child class name
+							
+							// Check for any further nested ChildClasses in each childClass
+							if (childClass.ChildClasses && childClass.ChildClasses.member) {
+							childClass.ChildClasses.member.forEach(subChildClass => {
+								console.log("    Sub Child Class: ", subChildClass.name);  // Log the sub-child class name
+							});
+							}
+						});
+						}
+					});
 				}
 				return ClassTableData;
 			},
