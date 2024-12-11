@@ -298,8 +298,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								// Check for any further nested ChildClasses in each childClass
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
-									console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
-									console.log("--ALLClasses.classes-----:", ALLClasses.classes); 
+									//console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
+									//console.log("--ALLClasses.classes-----:", ALLClasses.classes); 
 									ALLClasses.classes.push({"id":subChildClass.id,"title":subChildClass.title});
 								});
 								}
