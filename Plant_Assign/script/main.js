@@ -317,8 +317,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				//Need to update proper Collbspace anme in future
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
-				//urlObjWAF += sPartId;
-				//urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"")
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output
