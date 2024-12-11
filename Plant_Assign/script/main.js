@@ -288,8 +288,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"")
 				if(LibDetails.status) {
-					const lib_id = LibDetails.output
-					console.log("lib_id===="+lib_id);
+					const lib_Details = LibDetails.output
+					console.log("lib_id===="+lib_Details.member[0].id);
 				}
 
 
