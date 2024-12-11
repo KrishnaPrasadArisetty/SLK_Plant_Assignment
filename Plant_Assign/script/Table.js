@@ -51,9 +51,7 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                     { title: "Oracle Template", field: "OracleTemplate" },
                     { title: "Make/Buy", field: "Make_Buy" },
                     { title: "ERP Status", field: "ERPStatus" },
-                    { title: "Sort Value", field: "SortValue" },
-                    
-
+                    { title: "Sort Value", field: "SortValue" }
                 ],
             });
             whereUsedTable.tableData = table;
