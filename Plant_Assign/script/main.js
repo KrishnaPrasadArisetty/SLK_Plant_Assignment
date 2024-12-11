@@ -300,7 +300,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								childClass.ChildClasses.member.forEach(subChildClass => {
 									console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
 									console.log("--ALLClasses.classes-----:", ALLClasses.classes); 
-									ALLClasses.classes.push({"id":subChildClass.id});
+									ALLClasses.classes.push({"id":subChildClass.id,"title":subChildClass.title});
 								});
 								}
 							});
