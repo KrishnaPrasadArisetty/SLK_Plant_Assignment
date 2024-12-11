@@ -281,6 +281,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getLibClassDetails: function(sLibId) {
 				let ClassTableData = "";
+				//Call web service--
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
+				urlObjWAF += sLibId;
+				urlObjWAF += "?$mask=dslib:ExpandClassifiableClassesMask";
+				let LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"")
+				if(LibClassDetails.status) {
+					const lib_Classes = LibClassDetails.output
+					//const sLibId = lib_Classes.member[0].id;
+					console.log("lib_Classes==="+lib_Classes);
+				}
 				return ClassTableData;
 			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
