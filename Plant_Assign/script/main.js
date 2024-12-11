@@ -324,7 +324,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const lib_Details = LibDetails.output
 					const sLibId = lib_Details.member[0].id;
 					console.log("lib_id===="+sLibId);
-					ClassTableData = getLibClassDetails(sLibId);
+					ClassTableData = comWidget.getLibClassDetails(sLibId);
 				}
 
 
