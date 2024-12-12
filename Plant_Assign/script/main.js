@@ -269,13 +269,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 
 				container.appendChild(mainDiv);
-				/*
-				var tabledata = [
-					{id:1, Plant:"MVO", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", Make_Buy:"make", ERPStatus:"true", SortValue:"1"},
-					{id:1, Plant:"MMB", Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", Make_Buy:"buy", ERPStatus:"false", SortValue:"3"},
-				];
-				container.appendChild(whereUsedTable.showTable(tabledata));
-				*/
+				
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
 			},
@@ -317,21 +311,32 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
+			getAssignedClassDetails: function(sPartId) {
+				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
+				let body = {"busIDs": [sPartId]}
+				console.log("class details Body --->", body);
+				let  response =comWidget.callwebService("GET",urlObjWAF,body);
+				if(response.status) {
+					console.log("response---->", response.output);
+				}
+				return "krishna..";
+			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = "";
 				let ALLClasses = "";
+				let AssignedClasses = "";
 				//Need to update proper Collbspace anme in future
+				//Here searchstr is Library description need to update and fix furthur
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
 				if(LibDetails.status) {
-					const lib_Details = LibDetails.output
+					const lib_Details = LibDetails.output;
 					const sLibId = lib_Details.member[0].id;
-					console.log("lib_id===="+sLibId);
 					ALLClasses = comWidget.getLibClassDetails(sLibId);
-					console.log("ALLClasses===="+ALLClasses);
+					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
-
+				AssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
@@ -339,45 +344,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				];
 				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData));
 					
-
-				/*
-				let urlObjWAF = urlBASE+"resources/v1/modeler/documents/parentId/";
-				urlObjWAF += sPartId;
-				urlObjWAF += "?parentRelName=SpecificationDocument";
-				let SpecDetails =comWidget.callwebService("GET",urlObjWAF,"")
-				for (let i = 0; i < SpecDetails.items; i++) { 
-					let sSpec = SpecDetails.data[i];
-					let sSpecID = sSpec.id;
-					let sSpecTitle =  sSpec.dataelements.title;
-					let sSpecRevision =  sSpec.dataelements.revision;
-					//let sSpecDesc =  document.dataelements.description;
-					//let sSpecState =  document.dataelements.state;
-					const row = document.createElement("tr");
-					const checkboxHeader2 = document.createElement("th");
-					const checkbox2 = document.createElement("input");
-					checkbox2.type = "checkbox";
-					checkboxHeader2.appendChild(checkbox2);
-					row.appendChild(checkboxHeader2);
-
-					const cell1 = document.createElement("td");
-					cell1.innerText = sSpecTitle;
-					row.appendChild(cell1);
-					const cell2 = document.createElement("td");
-					//========
-					cell2.innerText = sSpecRevision;
-					row.appendChild(cell2);
-					[ 'Att1 Value', 'Att2 Value', 'Att3 Value','Att4 Value'].forEach(value => {
-						
-						const cell = widget.createElement("td");
-						const select = widget.createElement("select");
-						select.innerHTML = '<option>Y</option><option>N</option>';
-						cell.appendChild(select)
-						row.appendChild(cell);
-					});
-					classtable.appendChild(row);
-				}
-				*/
-
 				
 			},
 	
