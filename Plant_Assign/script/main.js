@@ -3,7 +3,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		
 		var urlBASE,csrfToken,securityContext;
 		
-		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Rosemount%20Flow",
+		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
 		var comWidget = {
@@ -313,7 +313,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getAssignedClassDetails: function(sPartId) {
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
-				let body = {"busIDs": [sPartId]}
+				let body = {"busIDs": [sPartId]};
 				console.log("class details Body --->", body);
 				let  response =comWidget.callwebService("POST",urlObjWAF,body);
 				if(response.status) {
