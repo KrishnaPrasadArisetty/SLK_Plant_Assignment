@@ -93,7 +93,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var headerWAF = {
 					SecurityContext: securityContext,
 					Accept: "application/json",
-					ENO_CSRF_TOKEN : csrfToken
+					ENO_CSRF_TOKEN : csrfToken,
+					"Content-Type": "application/json"
 				};
 				console.log("headerWAF----"+headerWAF);
 				let returnobj = {};
