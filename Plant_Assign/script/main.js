@@ -319,8 +319,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let body = {"busIDs": [sPartId]};
 				console.log("class details Body -aaa-->", body);
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
-				if(response.status) {
-					let ClassExtensions = response.results[0];
+				if(response.status && response.results) {
+					let ClassExtensions = response.results[0].extensions;
 					console.log("ClassExtensions---->", JSON.stringify(ClassExtensions));
 				}
 				return "krishna..";
