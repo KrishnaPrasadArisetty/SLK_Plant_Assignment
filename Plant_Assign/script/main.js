@@ -315,13 +315,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
 			getAssignedClassDetails: function(sPartId) {
+				let AssignedClasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]};
 				console.log("class details Body -aaa-->", body);
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				if(response.status && response.output.results) {
 					let ClassExtensions = response.output.results[0].extensions;
-					console.log("ClassExtensions---->", JSON.stringify(ClassExtensions));
+					AssignedClasses.classes.push(Object.values(ClassExtensions).filter(item => item.icon === 'classif')
+					.map(item => ({ id: item.name, name: item.nameNLS })));
+					console.log("ClassExtensions---->", JSON.stringify(AssignedClasses.classes));
 				}
 				return "krishna..";
 			},
