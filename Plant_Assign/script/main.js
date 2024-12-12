@@ -318,10 +318,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]};
 				console.log("class details Body -aaa-->", body);
-				let  response =comWidget.callwebService("GET",urlObjWAF,JSON.stringify(body));
+				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				if(response.status) {
-					let ClassExtensions = data.results[0].extensions;
-					console.log("ClassExtensions---->", ClassExtensions);
+					let ClassExtensions = response.results[0];
+					console.log("ClassExtensions---->", JSON.stringify(ClassExtensions));
 				}
 				return "krishna..";
 			},
