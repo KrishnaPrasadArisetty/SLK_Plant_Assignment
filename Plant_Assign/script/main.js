@@ -345,7 +345,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let  uniqueInAllclasses = ALLClasses.classes.filter(allClass => 
 					!AssignedClasses.some(assigned => assigned.id === allClass.id)
 				  );
-				  console.log("uniqueInAllclasses--:", uniqueInAllclasses); 
+				  console.log("uniqueInAllclasses--:", uniqueInAllclasses);
+				  
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
