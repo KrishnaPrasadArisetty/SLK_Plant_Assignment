@@ -323,7 +323,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(response.status && response.output.results) {
 					let ClassExtensions = response.output.results[0].extensions;
 					AssignedClasses.classes.push(Object.values(ClassExtensions).filter(item => item.icon === 'classif')
-					.map(item => ({ id: item.name, name: item.nameNLS })));
+					.map(item => ({ id: item.namereplace(/^Generated/, ""), name: item.nameNLS })));
 					console.log("ClassExtensions---->", JSON.stringify(AssignedClasses.classes));
 				}
 				return "krishna..";
