@@ -92,8 +92,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			{
 				var headerWAF = {
 					SecurityContext: securityContext,
-					Accept: "application/json"
+					Accept: "application/json",
+					ENO_CSRF_TOKEN : csrfToken
 				};
+				console.log("headerWAF----"+headerWAF);
 				let returnobj = {};
 				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
 					method: methodWAF,
@@ -107,7 +109,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("kp--CallWebService--- >> ",dataResp);
 					},
 					onFailure: function(error, backendresponse, response_hdrs) {
-						console.log("Failedddddd",backendresponse);
+						console.log("Failedddddd",dataResp);
 						returnobj.status = false;
 						console.log(response_hdrs);
 						widget.body.innerHTML += "<p>Something Went Wrong"+error+"</p>";
