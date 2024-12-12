@@ -107,7 +107,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("kp--CallWebService--- >> ",dataResp);
 					},
 					onFailure: function(error, backendresponse, response_hdrs) {
-						console.log(backendresponse);
+						console.log("Failedddddd",backendresponse);
 						returnobj.status = false;
 						console.log(response_hdrs);
 						widget.body.innerHTML += "<p>Something Went Wrong"+error+"</p>";
