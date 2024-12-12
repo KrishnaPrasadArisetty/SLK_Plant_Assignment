@@ -319,8 +319,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				if(response.status && response.output.results) {
 					let ClassExtensions = response.output.results[0].extensions;
-					AssignedClasses.classes.push(Object.values(ClassExtensions).filter(item => item.icon === 'classif')
-					.map(item => ({ id: item.name.slice(9), name: item.nameNLS })));
+					AssignedClasses.classes = Object.values(ClassExtensions).filter(item => item.icon === 'classif')
+					.map(item => ({ id: item.name.slice(9), name: item.nameNLS }));
 				}
 				return AssignedClasses;
 			},
