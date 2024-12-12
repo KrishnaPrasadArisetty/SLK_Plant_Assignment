@@ -315,7 +315,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]}
 				console.log("class details Body --->", body);
-				let  response =comWidget.callwebService("GET",urlObjWAF,body);
+				let  response =comWidget.callwebService("POST",urlObjWAF,body);
 				if(response.status) {
 					console.log("response---->", response.output);
 				}
