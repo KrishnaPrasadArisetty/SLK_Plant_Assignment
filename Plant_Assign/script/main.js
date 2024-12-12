@@ -295,8 +295,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								// Check for any further nested ChildClasses in each childClass
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
-									//console.log("Sub Child Class:", subChildClass.title);  // Log the sub-child class name
-									//console.log("--ALLClasses.classes-----:", ALLClasses.classes); 
 									ALLClasses.classes.push({"id":subChildClass.id,"title":subChildClass.title});
 								});
 								}
@@ -318,15 +316,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let AssignedClasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]};
-				console.log("class details Body -aaa-->", body);
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				if(response.status && response.output.results) {
 					let ClassExtensions = response.output.results[0].extensions;
 					AssignedClasses.classes.push(Object.values(ClassExtensions).filter(item => item.icon === 'classif')
 					.map(item => ({ id: item.namereplace(/^Generated/, ""), name: item.nameNLS })));
-					console.log("ClassExtensions---->", JSON.stringify(AssignedClasses.classes));
 				}
-				return "krishna..";
+				return AssignedClasses;
 			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
@@ -344,6 +340,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
 				AssignedClasses = comWidget.getAssignedClassDetails(sPartId);
+				console.log("AssignedClasses--:", AssignedClasses); 
 
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
