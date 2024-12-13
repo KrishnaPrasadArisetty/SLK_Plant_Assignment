@@ -314,7 +314,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
-				let uniqueInAllclasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]};
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
@@ -330,6 +329,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let ClassTableData = "";
 				let ALLClasses = "";
 				let AssignedClasses = "";
+				let uniqueInAllclasses = { "classes": [] };
 				//Need to update proper Collbspace anme in future
 				//Here searchstr is Library description need to update and fix furthur
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
