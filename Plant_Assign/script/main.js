@@ -15,7 +15,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var dropimage = widget.createElement('img', { 'src': 'https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/dropImage.png', 'alt': 'Dropbox Image' });
 				dropbox.append(dropimage);
 				var dropboxsep = widget.createElement('div', { 'class' : 'dropboxsep', 'text' : '-- or --' });
-				dropboxsep.style= "font-size: 12px; color: #d5e8f2; text-align: center";
+				dropboxsep.style= "font-size: 12px; color:rgb(202, 228, 242); text-align: center";
 				dropbox.append(dropboxsep);
 				var button = document.createElement('button', {'class':'dynamic-button'});
 
@@ -245,6 +245,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var savebutton = document.createElement('button', {'class':'dynamic-button'});
 				savebutton.style = "border-radius: 4px; padding: 5px 20px; font-size: 12px; text-align: center; margin: 10px; background-color: #368ec4; color: white; border: none; cursor: pointer";
 				savebutton.innerHTML = 'save';
+				savebutton.addEventListener('click', () => comWidget.SaveData());
 				ssubDiv.appendChild(savebutton);
 
 				var exportbutton = document.createElement('button', {'class':'dynamic-button'});
@@ -334,8 +335,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						
 					});
 
-					//AssignedClasses.classes = Object.values(ClassExtensions).filter(item => item.icon === 'classif')
-					//.map(item => ({ id: item.name.slice(9), name: item.nameNLS }));
 				}
 				return AssignedClasses;
 			},
@@ -423,6 +422,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "Avaliable Plant", field: "Plant" }
                 ];
 				return columns;
+			},
+			SaveData : function (){
+				let theInput = widget.body.querySelector('.example-table');
+				console.log("theInput========"+theInput);
+
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
