@@ -424,7 +424,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return columns;
 			},
 			SaveData : function (){
-				let theInput = widget.body.querySelector('#AvaliablePlantsTable');
+				let theInput = widget.body.querySelector('#AssignedPlantsTable');
 				console.log("theInput========"+theInput);
 
 			}
