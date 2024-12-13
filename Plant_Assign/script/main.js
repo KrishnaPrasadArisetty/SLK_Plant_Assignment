@@ -431,7 +431,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				rows.forEach(row => {
 				    let rowData = {};
 				    let cells = row.querySelectorAll('.tabulator-cell');
-					console.log("cells--->>>"+cells);
+					console.log("cells------>"+cells);
 				    cells.forEach(cell => {
 				        let field = cell.getAttribute('tabulator-field'); 
 				        let value = cell.innerText.trim();
