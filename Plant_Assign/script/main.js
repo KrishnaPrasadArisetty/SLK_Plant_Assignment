@@ -312,7 +312,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
-			getAssignedClassDetails: function(sPartId) {
+			getAssignedClassDetails: function(sPartId,ALLClasses) {
 				let AssignedClasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 				urlObjWAF += sPartId;
@@ -321,6 +321,15 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(response.status && response.output.member[0].ClassificationAttributes.member) {
 					let ClassExtensions = response.output.member[0].ClassificationAttributes.member;
 					console.log("ClassExtensions----"+ClassExtensions);
+					ClassExtensions.forEach(classItem => {
+						ALLClasses.classes.forEach(allClass => {
+							if (classItem.ClassID === allClass.id) {
+								AssignedClasses.push({"id":allClass.id,"title":allClass.title});
+							}
+						});
+						
+					});
+
 					//AssignedClasses.classes = Object.values(ClassExtensions).filter(item => item.icon === 'classif')
 					//.map(item => ({ id: item.name.slice(9), name: item.nameNLS }));
 				}
@@ -342,7 +351,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ALLClasses = comWidget.getLibClassDetails(sLibId);
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
-				AssignedClasses = comWidget.getAssignedClassDetails(sPartId);
+				AssignedClasses = comWidget.getAssignedClassDetails(sPartId,ALLClasses);
 				console.log("AssignedClasses--:", AssignedClasses); 
 
 				uniqueInAllclasses.classes = ALLClasses.classes.filter(allClass => 
