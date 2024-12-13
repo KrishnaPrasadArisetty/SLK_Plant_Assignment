@@ -410,9 +410,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "Change Status", field: "Change_Status" },
                     { title: "Oracle Template", field: "Oracle_Template", editor:"input" },
                     { title: "ERP Status", field: "ERP_Status" }, 
-                    { title: "ERP Export", field: "ERP_Export", editor:"select", editorParams:{values:["Yes", "No"]}},
-                    { title: "Lead Plant", field: "Lead_Plant", editor:"select", editorParams:{values:["True", "False"]} },
-                    { title: "Make/Buy", field: "Make_Buy", editor:"select", editorParams:{values:["make", "buy"]} },
+                    { title: "ERP Export", field: "ERP_Export", editor:"list", editorParams:{values:["Yes", "No"]}},
+                    { title: "Lead Plant", field: "Lead_Plant", editor:"list", editorParams:{values:["True", "False"]} },
+                    { title: "Make/Buy", field: "Make_Buy", editor:"list", editorParams:{values:["make", "buy"]} },
                     { title: "Sort Value", field: "Sort_Value" }
                 ];
 				return columns;
