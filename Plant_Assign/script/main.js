@@ -324,7 +324,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ClassExtensions.forEach(classItem => {
 						ALLClasses.classes.forEach(allClass => {
 							if (classItem.ClassID === allClass.id) {
-								AssignedClasses.classes.push({"id":allClass.id,"title":allClass.title});
+								let classObject = {"id":allClass.id,"title":allClass.title};
+								classItem.Attributes.forEach(attItem => {
+									classObject[attItem.name] = attItem.value;
+								});
+								AssignedClasses.classes.push(classObject);
 							}
 						});
 						
