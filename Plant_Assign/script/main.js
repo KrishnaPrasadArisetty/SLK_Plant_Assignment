@@ -349,13 +349,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("uniqueInAllclasses--:", uniqueInAllclasses);
 
 				mainDiv.appendChild(whereUsedTable.showTable(uniqueInAllclasses.classes.map((plantObject, index) => {
-					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable));
+					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable()));
 
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
 				];
-				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable));
+				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable()));
 			},
 	
 			partTable: function(sPartId,partName,partTitle,parttable) { 
@@ -386,7 +386,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 			},
 			getAssignedPlantTable : function (){
-				columns: [
+				const columns =  [
                     { title: "Plant", field: "Plant" },
                     { title: "Seq", field: "Seq" },
                     { title: "Status", field: "Status" },
@@ -400,13 +400,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "Lead Plant", field: "Lead_Plant" },
                     { title: "Make/Buy", field: "Make_Buy" },
                     { title: "Sort Value", field: "Sort_Value" }
-                ]
+                ];
 				return columns;
 			},
 			getAvaliablePlantTable : function (){
-				columns: [
+				const columns =  [
                     { title: "Plant", field: "Plant" }
-                ]
+                ];
 				return columns;
 			}
 		};
