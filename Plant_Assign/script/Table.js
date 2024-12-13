@@ -1,8 +1,8 @@
 require.config({
     paths: {
         // Define the path for Tabulator (already included in HTML via CDN)
-        tabulator: 'https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min',
-        tabulatorCss: 'https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min' // Path for Tabulator CSS
+        tabulator: 'https://unpkg.com/tabulator-tables@5.0.0/dist/js/tabulator.min',
+        tabulatorCss: 'https://unpkg.com/tabulator-tables@5.0.0/dist/css/tabulator.min' // Path for Tabulator CSS
     },
     shim: {
         // Make Tabulator available globally to RequireJS
