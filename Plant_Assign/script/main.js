@@ -314,6 +314,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
+				let uniqueInAllclasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
 				let body = {"busIDs": [sPartId]};
 				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
@@ -342,43 +343,72 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				AssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 				console.log("AssignedClasses--:", AssignedClasses); 
 
-				let  uniqueInAllclasses = ALLClasses.classes.filter(allClass => 
+				uniqueInAllclasses.classes = ALLClasses.classes.filter(allClass => 
 					!AssignedClasses.classes.some(assigned => assigned.id === allClass.id)
 				  );
-				  console.log("uniqueInAllclasses--:", uniqueInAllclasses);
+				console.log("uniqueInAllclasses--:", uniqueInAllclasses);
+
+				mainDiv.appendChild(whereUsedTable.showTable(uniqueInAllclasses.classes.map((plantObject, index) => {
+					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable));
 
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
 				];
-				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData));
-					
-				
+				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable));
 			},
 	
 			partTable: function(sPartId,partName,partTitle,parttable) { 
 	
-					const headers = ['Part Names', 'Title'];
-					headers.forEach(text => {
-						const headerCol = document.createElement("th");
-						headerCol.innerText = text;
-						parttable.appendChild(headerCol);
-					});
+				const headers = ['Part Names', 'Title'];
+
+				// Create the first row
+				const row1 = document.createElement("tr");
+				headers.forEach(text => {
+					const headerCol = document.createElement("th");
+					headerCol.innerText = text;
+					row1.appendChild(headerCol);
+				});
+				parttable.appendChild(row1);  // Add the first row to the table
 				
-					const head2 = [partName,partTitle];
-					head2.forEach(text => {
-						const headerCol = document.createElement("th");
-						headerCol.innerText = text;
-						parttable.appendChild(headerCol);
-					});
-				
+				// Create the second row
+				const head2 = [partName, partTitle];
+				const row2 = document.createElement("tr");
+				head2.forEach(text => {
+					const headerCol = document.createElement("th");
+					headerCol.innerText = text;
+					row2.appendChild(headerCol);
+				});
+				parttable.appendChild(row2);  // Add the second row to the table
 	
 			},
 			AddProductCard : function (){
+
 			},
-			connectBase : function (){
-				 
+			getAssignedPlantTable : function (){
+				columns: [
+                    { title: "Plant", field: "Plant" },
+                    { title: "Seq", field: "Seq" },
+                    { title: "Status", field: "Status" },
+                    { title: "MFG Change", field: "MFG_Change" },
+                    { title: "MFG Status", field: "MFG_Status" },
+                    { title: "Change", field: "Change" },
+                    { title: "Change Status", field: "Change_Status" },
+                    { title: "Oracle Template", field: "Oracle_Template" },
+                    { title: "ERP Status", field: "ERP_Status" }, 
+                    { title: "ERP Export", field: "ERP_Export" },
+                    { title: "Lead Plant", field: "Lead_Plant" },
+                    { title: "Make/Buy", field: "Make_Buy" },
+                    { title: "Sort Value", field: "Sort_Value" }
+                ]
+				return columns;
 			},
+			getAvaliablePlantTable : function (){
+				columns: [
+                    { title: "Plant", field: "Plant" }
+                ]
+				return columns;
+			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
 		widget.addEvent('onRefresh', comWidget.onLoad);

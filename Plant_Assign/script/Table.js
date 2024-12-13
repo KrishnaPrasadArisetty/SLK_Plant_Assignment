@@ -15,7 +15,7 @@ require.config({
 define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar) {
 
     var whereUsedTable = {
-        showTable: function (data) {
+        showTable: function (data,TableColumn) {
             // Create Tabulator table
             var tableDiv = document.createElement('div');
             tableDiv.id = "example-table";
@@ -44,21 +44,7 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                     headerSort: false
                 },
                 layout: "fitData",
-                columns: [
-                    { title: "Plant", field: "Plant" },
-                    { title: "Seq", field: "Seq" },
-                    { title: "Status", field: "Status" },
-                    { title: "MFG Change", field: "MFG_Change" },
-                    { title: "MFG Status", field: "MFG_Status" },
-                    { title: "Change", field: "Change" },
-                    { title: "Change Status", field: "Change_Status" },
-                    { title: "Oracle Template", field: "Oracle_Template" },
-                    { title: "ERP Status", field: "ERP_Status" }, 
-                    { title: "ERP Export", field: "ERP_Export" },
-                    { title: "Lead Plant", field: "Lead_Plant" },
-                    { title: "Make/Buy", field: "Make_Buy" },
-                    { title: "Sort Value", field: "Sort_Value" }
-                ],
+                columns:TableColumn,
             });
             whereUsedTable.tableData = table;
             return tableDiv;
