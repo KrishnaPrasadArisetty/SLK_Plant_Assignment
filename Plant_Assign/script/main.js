@@ -324,7 +324,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ClassExtensions.forEach(classItem => {
 						ALLClasses.classes.forEach(allClass => {
 							if (classItem.ClassID === allClass.id) {
-								AssignedClasses.push({"id":allClass.id,"title":allClass.title});
+								AssignedClasses.classes.push({"id":allClass.id,"title":allClass.title});
 							}
 						});
 						
