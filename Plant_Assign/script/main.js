@@ -352,8 +352,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable()));
 
 				ClassTableData = [
-					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
-					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"yes", Lead_Plant:"False", Make_Buy:"Buy", SortValue:"2"},
+					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
+					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"buy", SortValue:"2"},
 				];
 				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable()));
 			},
@@ -394,11 +394,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "MFG Status", field: "MFG_Status" },
                     { title: "Change", field: "Change" },
                     { title: "Change Status", field: "Change_Status" },
-                    { title: "Oracle Template", field: "Oracle_Template" },
+                    { title: "Oracle Template", field: "Oracle_Template",editor:"input" },
                     { title: "ERP Status", field: "ERP_Status" }, 
-                    { title: "ERP Export", field: "ERP_Export" },
-                    { title: "Lead Plant", field: "Lead_Plant" },
-                    { title: "Make/Buy", field: "Make_Buy" },
+                    { title: "ERP Export", field: "ERP_Export", editor:"select", editorParams:{values:["Yes", "No"]}},
+                    { title: "Lead Plant", field: "Lead_Plant", editor:"select", editorParams:{values:["True", "False"]} },
+                    { title: "Make/Buy", field: "Make_Buy", editor:"select", editorParams:{values:["make", "buy"]} },
                     { title: "Sort Value", field: "Sort_Value" }
                 ];
 				return columns;
