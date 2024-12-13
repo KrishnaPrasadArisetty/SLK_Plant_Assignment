@@ -405,7 +405,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getAvaliablePlantTable : function (){
 				const columns =  [
-                    { title: "Plant", field: "Plant" }
+                    { title: "Avaliable Plant", field: "Plant" }
                 ];
 				return columns;
 			}
