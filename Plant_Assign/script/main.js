@@ -317,7 +317,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 				lurlObjWAF += sPartId;
 				urlObjWAF += "?$mask=dslib:ClassificationAttributesMask";
-				let  response =comWidget.callwebService("POST",urlObjWAF,"");
+				let  response =comWidget.callwebService("GET",urlObjWAF,"");
 				if(response.status && response.output.member[0].ClassificationAttributes.member) {
 					let ClassExtensions = response.output.member[0].ClassificationAttributes.member;
 					console.log("ClassExtensions----"+ClassExtensions);
