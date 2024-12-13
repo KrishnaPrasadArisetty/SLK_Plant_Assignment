@@ -314,13 +314,15 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
-				let urlObjWAF = urlBASE+"resources/v1/collabServices/attributes/op/read";
-				let body = {"busIDs": [sPartId]};
-				let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
-				if(response.status && response.output.results) {
-					let ClassExtensions = response.output.results[0].extensions;
-					AssignedClasses.classes = Object.values(ClassExtensions).filter(item => item.icon === 'classif')
-					.map(item => ({ id: item.name.slice(9), name: item.nameNLS }));
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+				lurlObjWAF += sPartId;
+				urlObjWAF += "?$mask=dslib:ClassificationAttributesMask";
+				let  response =comWidget.callwebService("POST",urlObjWAF,"");
+				if(response.status && response.output.member[0].ClassificationAttributes.member) {
+					let ClassExtensions = response.output.member[0].ClassificationAttributes.member;
+					console.log("ClassExtensions----"+ClassExtensions);
+					//AssignedClasses.classes = Object.values(ClassExtensions).filter(item => item.icon === 'classif')
+					//.map(item => ({ id: item.name.slice(9), name: item.nameNLS }));
 				}
 				return AssignedClasses;
 			},
