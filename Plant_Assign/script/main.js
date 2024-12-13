@@ -424,9 +424,25 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return columns;
 			},
 			SaveData : function (){
-				let theInput = widget.body.querySelector('#AssignedPlantsTable');
-				console.log("theInput========"+theInput);
-
+				let tableData = { "classes" : [] }
+				let assignedplants = widget.body.querySelector('#AssignedPlantsTable');
+				let theInput = assignedplants.querySelector('.tabulator-tableholder');  
+				let rows = theInput.querySelectorAll('.tabulator-row');
+				rows.forEach(row => {
+				    let rowData = {};
+				    let cells = row.querySelectorAll('.tabulator-cell');
+					console.log("cells--->>>"+cells);
+				    cells.forEach(cell => {
+				        let field = cell.getAttribute('tabulator-field'); 
+				        let value = cell.innerText.trim();
+						if (field !== null) {
+					        rowData[field] = value;
+							console.log(field+"<<-www-->>>"+value);
+						}
+				    });
+					tableData.classes.push(rowData);
+				});
+				console.log("final--->"+JSON.stringify(tableData));
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
