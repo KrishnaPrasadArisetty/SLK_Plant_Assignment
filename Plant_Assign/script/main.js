@@ -363,13 +363,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("uniqueInAllclasses--:", uniqueInAllclasses);
 
 				mainDiv.appendChild(whereUsedTable.showTable(uniqueInAllclasses.classes.map((plantObject, index) => {
-					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable()));
+					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantsTable"));
 
 				ClassTableData = [
 					{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 					{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"buy", SortValue:"2"},
 				];
-				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable()));
+				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable(),"AssignedPlantsTable"));
 			},
 	
 			partTable: function(sPartId,partName,partTitle,parttable) { 
@@ -424,7 +424,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return columns;
 			},
 			SaveData : function (){
-				let theInput = widget.body.querySelector('.example-table');
+				let theInput = widget.body.querySelector('#AvaliablePlantsTable');
 				console.log("theInput========"+theInput);
 
 			}

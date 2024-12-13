@@ -15,13 +15,13 @@ require.config({
 define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar) {
 
     var whereUsedTable = {
-        showTable: function (data,TableColumn) {
+        showTable: function (data,TableColumn,Tableid) {
             // Create Tabulator table
             var tableDiv = document.createElement('div');
-            tableDiv.id = "example-table";
+            tableDiv.id = Tableid;
             widget.body.appendChild(tableDiv);
 
-            var table = new Tabulator("#example-table", {
+            var table = new Tabulator("#"+Tableid, {
                 data: data,
                 layout: "fitColumns",
                 resizableColumnGuide: true,
