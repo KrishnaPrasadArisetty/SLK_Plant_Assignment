@@ -452,6 +452,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					tableData.classes.push(rowData);
 				});
 				console.log("final--->"+JSON.stringify(tableData));
+				alert("Data Saved Successfully");
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
