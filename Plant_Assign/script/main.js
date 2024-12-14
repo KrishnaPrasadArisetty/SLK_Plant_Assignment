@@ -368,6 +368,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				AssignedClasses.classes.forEach((Plantclass,index) => {
 					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template: Plantclass.PlantOracleTemplate, ERP_Status:"true",ERP_Export:Plantclass.PlantERPExoprt, Lead_Plant:Plantclass.PlantLeadPlant, Make_Buy:"make", SortValue:"1"});
 				});
+
+				//aaaaa
 				//ClassTableData = [
 				//	{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", Change_Status:"In Work", Oracle_Template:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 				//	{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"buy", SortValue:"2"},
