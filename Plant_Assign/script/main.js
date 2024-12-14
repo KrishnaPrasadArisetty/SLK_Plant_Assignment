@@ -6,9 +6,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
+
+		//------
+
 		var comWidget = {
 
 			onLoad: function() { 
+				console.log("krishna-Inside-->");
 								
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : ''});
