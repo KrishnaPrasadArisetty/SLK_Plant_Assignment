@@ -494,7 +494,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
 					//Update cestep
-					getProductcestamp();
+					comWidget.getProductcestamp();
 					updateditem["cestamp"] = cestamp;
 					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
