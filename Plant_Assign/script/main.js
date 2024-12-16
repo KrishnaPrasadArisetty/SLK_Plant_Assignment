@@ -515,7 +515,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
 					if(response.status){
 						console.log("updateditem------"+JSON.stringify(response.output));
+					}else {
+						console.log("updateditem--Error----");
 					}
+
 				}
 
 				
