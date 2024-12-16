@@ -494,12 +494,17 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					});
 				});
 				console.log("updateditem------"+JSON.stringify(updateditem));
-				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
-				urlObjWAF += sMainPartId;
-				let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
-				if(response.status){
-					console.log("updateditem------"+JSON.stringify(response.output));
+				if (JSON.stringify(updateditem) !== "{}") {
+					updateditem[cestamp] = cestamp;
+					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+					urlObjWAF += sMainPartId;
+					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
+					if(response.status){
+						console.log("updateditem------"+JSON.stringify(response.output));
+					}
 				}
+
+				
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
