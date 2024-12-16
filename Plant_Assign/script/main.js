@@ -498,7 +498,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += sMainPartId;
 				let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
 				if(response.status){
-					returnobj.status = true;
 					console.log("updateditem------"+JSON.stringify(response.output));
 				}
 			}
