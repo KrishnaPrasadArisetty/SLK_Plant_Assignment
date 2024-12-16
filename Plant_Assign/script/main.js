@@ -454,12 +454,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					        rowData[field] = value;
 						}
 				    });
-					tableData.classes.push(rowData);
-					if(tableData.classes){
-						comWidget.updateClassAttribuets(tableData);
-					}
+					tableData.classes.push(rowData);					
 				});
-				
+				if(tableData.classes){
+					comWidget.updateClassAttribuets(tableData);
+				}
 			},
 			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
@@ -467,7 +466,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("InitialAssignedClasses--------->"+JSON.stringify(InitialAssignedClasses));
 				InitialAssignedClasses.classes.forEach(intclass => {
 					tableData.classes.forEach(tableitem => {
-						
 						let plantName  = tableitem.Plant.slice(6);
 						if (intclass.title == tableitem.Plant) {
 							//old row updated
@@ -495,24 +493,12 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
-					updateditem["cestamp"] = cestamp;
-					let body = [{
-						"referencedObject": {
-									"source":"https://3dxr23x-otb1.emrsn.org:447/3dspace",
-									"type": "dslib:ClassifiedItem",
-									"identifier": sMainPartId,
-									"relativePath": "resources/v1/modeler/dslib/dslib:ClassifiedItem/"+sMainPartId
-						},
-					}];
-
-					body[0]["attributes"] = updateditem;
-					console.log("Body===="+JSON.stringify(body));
-					//let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/modify";
+					
 					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
-					
-
+					console.log("updateditem--11111----");
 					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
+					console.log("updateditem--2222222----");
 					if(response.status){
 						console.log("updateditem------"+JSON.stringify(response.output));
 					}else {
