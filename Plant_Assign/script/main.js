@@ -445,20 +445,45 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				rows.forEach(row => {
 				    let rowData = {};
 				    let cells = row.querySelectorAll('.tabulator-cell');
-					console.log("cells------>"+cells);
 				    cells.forEach(cell => {
 				        let field = cell.getAttribute('tabulator-field'); 
 				        let value = cell.innerText.trim();
 						if (field !== null) {
 					        rowData[field] = value;
-							console.log(field+"<<-www-->>>"+value);
 						}
 				    });
 					tableData.classes.push(rowData);
 				});
-				console.log("final--->"+JSON.stringify(tableData));
-				console.log("InitialAssignedClasses--------->"+InitialAssignedClasses);
-				alert("Data Saved Successfully");
+				//console.log("final--->"+JSON.stringify(tableData));
+				//console.log("InitialAssignedClasses--------->"+InitialAssignedClasses);
+				InitialAssignedClasses.classes.forEach(intclass => {
+					tableData.classes.forEach(tableitem => {
+						let updateditem = {};
+						let plantName  = tableitem.Plant.slice(6);
+						if (intclass.title == tableitem.Plant) {
+							//old row updated
+							if(intclass.oracletemplate !== tableitem.Oracle_Template){
+								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
+							}
+							if(intclass.ERPStatus !== tableitem.ERP_Status){
+								updateditem[plantName+"ERPStatus"] = tableitem.ERP_Status;
+							}
+							if(intclass.ERPExport !== tableitem.ERP_Export){
+								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
+							}
+							if(intclass.LeadPlant !== tableitem.Lead_Plant){
+								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
+							}
+							if(intclass.mbom ? "Make" : "Buy" !== tableitem.MBom){
+								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? false : true;
+							}
+						
+						} else {
+							//new RowAdded
+						}
+						console.log("updateditem------"+JSON.stringify(updateditem));
+					});
+				});
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
