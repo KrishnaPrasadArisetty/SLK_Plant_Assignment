@@ -493,6 +493,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
+					//Update cestep
+					getProductcestamp();
 					updateditem["cestamp"] = cestamp;
 					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
@@ -504,6 +506,14 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}else {
 						console.log("updateditem--Error----");
 					}
+				}
+			},
+			getProductcestamp : function() { 
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+				urlObjWAF += sMainPartId;
+				let  response =comWidget.callwebService("GET",urlObjWAF,"");
+				if(response.status && response.output.member[0]) {
+					cestamp = response.output.member[0].cestamp;
 				}
 			}
 		};
