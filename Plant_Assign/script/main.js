@@ -496,6 +496,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
 					updateditem[cestamp] = cestamp;
+					
 					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
 					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
