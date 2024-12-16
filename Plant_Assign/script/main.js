@@ -471,10 +471,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							if(intclass.ERPExport !== tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
 							}
-							if(intclass.LeadPlant !== tableitem.Lead_Plant){
+							if(String(intclass.LeadPlant) !== String(tableitem.Lead_Plant)){
 								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
 							}
-							if(intclass.mbom ? "Make" : "Buy" !== tableitem.MBom){
+							const MBOMValue = intclass.mbom ? "Make" : "Buy";
+							if( MBOMValue !== tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? false : true;
 							}
 						
