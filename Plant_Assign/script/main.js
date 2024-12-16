@@ -504,10 +504,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}else {
 						console.log("updateditem--Error----");
 					}
-
 				}
-
-				
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
