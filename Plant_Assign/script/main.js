@@ -373,7 +373,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					const plantName = Plantclass.title.slice(6);
 					console.log("plantName-------->"+plantName);
 					const ERPExport = plantName+"ERPExport";
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template: Plantclass.PlantOracleTemplate, ERP_Status:"true",ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.PlantLeadPlant, Make_Buy:"make", SortValue:"1"});
+					const OracleTemplate = plantName+"oracletemplate";
+					const ERPStatus = plantName+"ERPStatus";
+					const Lead_Plant  = plantName+"LeadPlan";
+					const Mbom  = plantName+"mbom"
+					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.OracleTemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.Lead_Plant, MBom:Plantclass.Mbom, SortValue:"1"});
 				});
 
 				//aaaaa
@@ -424,7 +428,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "ERP Status", field: "ERP_Status", editor:"list", editorParams:{values:{"true":"True", "false":"False"}}},
                     { title: "ERP Export", field: "ERP_Export", editor:"list", editorParams:{values:{"Yes":"Yes", "No":"No"}}},
                     { title: "Lead Plant", field: "Lead_Plant", editor:"list", editorParams:{values:{"True":"True", "False":"False"}}},
-                    { title: "Make/Buy", field: "Make_Buy", editor:"list", editorParams:{values:{"make":"make", "buy":"buy"}}},
+                    { title: "MBom", field: "MBom", hozAlign:"center", editor:true, formatter:"tickCross"},
                     { title: "Sort Value", field: "Sort_Value" }
                 ];
 				return columns;
