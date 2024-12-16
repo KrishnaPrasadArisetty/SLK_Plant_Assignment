@@ -2,7 +2,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var urlBASE,csrfToken,securityContext;
-		var InitialAssignedClasses;
+		var sMainPartId,InitialAssignedClasses,cestamp;
 		
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
 		urlBASE = "";
@@ -45,6 +45,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							return;
 						}
 						const PartId = objList[0].objectId;
+						sMainPartId = PartId;
 						const ProductType = objList[0].objectType;
 						if ("VPMReference"!=ProductType) {
 							alert("Please drop only Products");
@@ -328,6 +329,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let  response =comWidget.callwebService("GET",urlObjWAF,"");
 				if(response.status && response.output.member[0].ClassificationAttributes.member) {
 					let ClassExtensions = response.output.member[0].ClassificationAttributes.member;
+					cestamp = response.output.member[0].cestamp;
 					console.log("ClassExtensions----"+ClassExtensions);
 					ClassExtensions.forEach(classItem => {
 						ALLClasses.classes.forEach(allClass => {
@@ -453,7 +455,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						}
 				    });
 					tableData.classes.push(rowData);
+					if(tableData.classes){
+						comWidget.updateClassAttribuets(tableData);
+					}
 				});
+				
+			},
+			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
 				console.log("final--->"+JSON.stringify(tableData));
 				console.log("InitialAssignedClasses--------->"+JSON.stringify(InitialAssignedClasses));
@@ -477,7 +485,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							}
 							const MBOMValue = intclass.mbom ? "Make" : "Buy";
 							if( MBOMValue !== tableitem.MBom){
-								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? false : true;
+								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
 							}
 						
 						} else {
@@ -486,6 +494,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					});
 				});
 				console.log("updateditem------"+JSON.stringify(updateditem));
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+				urlObjWAF += sMainPartId;
+				let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
+				if(response.status){
+					returnobj.status = true;
+					console.log("updateditem------"+JSON.stringify(response.output));
+				}
 			}
 		};
 		widget.addEvent('onLoad', comWidget.onLoad);
