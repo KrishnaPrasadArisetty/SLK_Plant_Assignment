@@ -278,14 +278,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				container.appendChild(mainDiv);
 				
-				//-
-				table.on("cellEdited", function(cell) {
-					let updatedRows = table.getRows().filter(row => row.isChanged());
-					updatedRows.forEach(row => {
-						console.log(`Row ${row.getIndex()} was changed`);
-						alert("krishna");
-					});
-				});
 
 
 				widget.body.innerHTML="";
