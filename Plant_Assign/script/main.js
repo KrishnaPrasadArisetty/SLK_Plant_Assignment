@@ -508,7 +508,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					body[0]["attributes"] = updateditem;
 					console.log("Body===="+JSON.stringify(body));
 					//let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/modify";
-					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
+					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
 					
 
