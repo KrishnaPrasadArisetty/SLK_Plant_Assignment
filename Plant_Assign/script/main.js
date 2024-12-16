@@ -2,6 +2,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var urlBASE,csrfToken,securityContext;
+		var InitialAssignedClasses;
 		
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
 		urlBASE = "";
@@ -348,7 +349,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = [];
 				let ALLClasses = "";
-				let AssignedClasses = "";
+				 InitialAssignedClasses = "";
 				let uniqueInAllclasses = { "classes": [] };
 				//Need to update proper Collbspace anme in future
 				//Here searchstr is Library description need to update and fix furthur
@@ -360,18 +361,18 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ALLClasses = comWidget.getLibClassDetails(sLibId);
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
-				AssignedClasses = comWidget.getAssignedClassDetails(sPartId,ALLClasses);
-				console.log("AssignedClasses--:", AssignedClasses); 
+				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId,ALLClasses);
+				console.log("InitialAssignedClasses--:", InitialAssignedClasses); 
 
 				uniqueInAllclasses.classes = ALLClasses.classes.filter(allClass => 
-					!AssignedClasses.classes.some(assigned => assigned.id === allClass.id)
+					!InitialAssignedClasses.classes.some(assigned => assigned.id === allClass.id)
 				  );
 				console.log("uniqueInAllclasses--:", uniqueInAllclasses);
 
 				mainDiv.appendChild(whereUsedTable.showTable(uniqueInAllclasses.classes.map((plantObject, index) => {
 					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantsTable"));
 				
-				AssignedClasses.classes.forEach((Plantclass,index) => {
+					InitialAssignedClasses.classes.forEach((Plantclass,index) => {
 					const plantName = Plantclass.title.slice(6);
 					console.log("plantName-------->"+plantName);
 					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Buy" : "Make", SortValue:"1"});
@@ -456,6 +457,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					tableData.classes.push(rowData);
 				});
 				console.log("final--->"+JSON.stringify(tableData));
+				console.log("InitialAssignedClasses--------->"+InitialAssignedClasses);
 				alert("Data Saved Successfully");
 			}
 		};
