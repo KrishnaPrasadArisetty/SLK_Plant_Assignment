@@ -372,12 +372,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				AssignedClasses.classes.forEach((Plantclass,index) => {
 					const plantName = Plantclass.title.slice(6);
 					console.log("plantName-------->"+plantName);
-					const ERPExport = plantName+"ERPExport";
-					const OracleTemplate = plantName+"oracletemplate";
-					const ERPStatus = plantName+"ERPStatus";
-					//const LeadPlant  = plantName+"LeadPlant";
-					//const Mbom  = plantName+"mbom"
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.OracleTemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Buy" : "Make", SortValue:"1"});
+					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Buy" : "Make", SortValue:"1"});
 				});
 				console.log("ClassTableData-------->"+JSON.stringify(ClassTableData));
 				//aaaaa
