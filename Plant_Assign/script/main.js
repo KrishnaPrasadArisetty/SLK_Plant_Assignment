@@ -331,7 +331,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							if (classItem.ClassID === allClass.id) {
 								let classObject = {"id":allClass.id,"title":allClass.title};
 								classItem.Attributes.forEach(attItem => {
-									classObject[attItem.name] = attItem.value;
+									classObject[attItem.name.slice(3)] = attItem.value;
 								});
 								AssignedClasses.classes.push(classObject);
 							}
@@ -370,7 +370,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantsTable"));
 				
 				AssignedClasses.classes.forEach((Plantclass,index) => {
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template: Plantclass.PlantOracleTemplate, ERP_Status:"true",ERP_Export:Plantclass.PlantERPExoprt, Lead_Plant:Plantclass.PlantLeadPlant, Make_Buy:"make", SortValue:"1"});
+					const plantName = Plantclass.title.slice(6);
+					console.log("plantName-------->"+plantName);
+					const ERPExport = plantName+"ERPExport";
+					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template: Plantclass.PlantOracleTemplate, ERP_Status:"true",ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.PlantLeadPlant, Make_Buy:"make", SortValue:"1"});
 				});
 
 				//aaaaa
