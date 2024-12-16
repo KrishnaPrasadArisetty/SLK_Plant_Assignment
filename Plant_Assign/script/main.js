@@ -496,10 +496,22 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
 					updateditem[cestamp] = cestamp;
+					let body = [{
+						"referencedObject": {
+									"source":"https://3dxr23x-otb1.emrsn.org:447/3dspace",
+									"type": "dslib:ClassifiedItem",
+									"identifier": sMainPartId,
+									"relativePath": "resources/v1/modeler/dslib/dslib:ClassifiedItem/"+sMainPartId
+						},
+					}];
+
+					body[0]["attributes"] = updateditem;
+					console.log("Body===="+JSON.stringify(body));
+					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/modify";
+					//urlObjWAF += sMainPartId;
 					
-					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
-					urlObjWAF += sMainPartId;
-					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
+
+					let  response =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(updateditem));
 					if(response.status){
 						console.log("updateditem------"+JSON.stringify(response.output));
 					}
