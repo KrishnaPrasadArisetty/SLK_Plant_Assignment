@@ -60,13 +60,24 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let partCollabSpace  = dataResp3.member[0].collabspace;
 						console.log("partName---->", partName);
 						console.log("partTitle---->", partTitle);
-						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);
-						
-						
-
-						
+						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);						
 					},
 				});
+			},
+			classifyProduct : function(sClassId,sMainPartId) {
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+				let body = {
+					"ClassID": sClassId,
+					"ObjectsToClassify": [
+					  {
+						"source": urlBASE,
+						"type": "VPMReference",
+						"identifier": sMainPartId,
+						"relativePath": "/resources/v1/modeler/dseng/dseng:EngItem/"+sMainPartId
+					  }
+					]
+				  };
+				return comWidget.callwebService("POST",urlObjWAF,body);
 			},
 			AddPlantPopup : function(){
 				let assignedTable = whereUsedTable.AssigendPlantTableData;
@@ -81,9 +92,14 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						if (matchedClass) {
 							console.log("matchedClass---->"+matchedClass.id);
 							console.log("plant---->"+rowData.Plant);
-							assignedTable.addRow({ 
-								id: maxId+index+1, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
-							});
+							
+							//classify product to class
+							const result = classifyProduct(matchedClass.id,sMainPartId);
+							if(result.status){
+								assignedTable.addRow({ 
+									id: maxId+index+1, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
+								});
+							}							
 						}
 						row.delete();
 				    });
