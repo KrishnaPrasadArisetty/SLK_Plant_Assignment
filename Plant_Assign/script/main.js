@@ -65,7 +65,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 			},
 			classifyProduct : function(sClassId) {
-				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
 				let body = {
 					"ClassID": sClassId,
 					"ObjectsToClassify": [
