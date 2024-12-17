@@ -2,7 +2,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var urlBASE,csrfToken,securityContext;
-		var sMainPartId,InitialAssignedClasses,cestamp;
+		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses;
 		
 		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
 		urlBASE = "";
@@ -69,14 +69,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 			},
 			AddPlantPopup : function(){
-				//let Avalrows = whereUsedTable.AvaliablePlantTableData.getRows();
-				//let Assignrows = whereUsedTable.AssigendPlantTableData.getRows();
-				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();t
-				console.log("selectedRows--->"+selectedRows);  
-				selectedRows.forEach(row => {
-					let rowData = row.getData();
-					console.log(rowData);  
-				});
+				console.log("ALLClasses===>"+ALLClasses);
+				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
+				if (selectedRows.length > 0) {  // Check if any rows are selected
+				    selectedRows.forEach(row => {
+				        let rowData = row.getData();
+				        console.log(rowData);  // Log the row data
+				    });
+				} else {
+				    alert("Please select at least one row from available plantsppp");  // Show alert if no rows are selected
+				}
 
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
@@ -273,7 +275,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.appendChild(container);
 			},
 			getLibClassDetails: function(sLibId) {
-				let ALLClasses = { "classes": [] };
+				ALLClasses = { "classes": [] };
 				//Call web service--
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
