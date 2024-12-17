@@ -12,7 +12,7 @@ require.config({
     }
 });
 
-define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar) {
+define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabulator, tableToolbar,tableName) {
 
     var whereUsedTable = {
         showTable: function (data,TableColumn,Tableid) {
@@ -46,7 +46,15 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 layout: "fitData",
                 columns:TableColumn,
             });
-            whereUsedTable.tableData = table;
+
+            if (tableName === "AssigendPlantTable") {
+                whereUsedTable.AssigendPlantTable = table;
+            } else if (tableName === "AvaliablePlantTable") {
+                whereUsedTable.AvaliablePlantTable = table;
+            }else {
+                whereUsedTable.tableData = table;
+            }
+            
             return tableDiv;
         }
     };

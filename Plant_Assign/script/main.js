@@ -280,7 +280,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				container.appendChild(mainDiv);
 				
-
+				//whereUsedTable.tableData.addRow({ 
+				//	id:3, Plant:"KKKK", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", Change_Status:"In Work", Oracle_Template:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"
+				//});
 
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
@@ -372,7 +374,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				console.log("uniqueInAllclasses--:", uniqueInAllclasses);
 
 				mainDiv.appendChild(whereUsedTable.showTable(uniqueInAllclasses.classes.map((plantObject, index) => {
-					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantsTable"));
+					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantTable"));
 				
 					InitialAssignedClasses.classes.forEach((Plantclass,index) => {
 					const plantName = Plantclass.title.slice(6);
@@ -385,7 +387,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//	{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", Change_Status:"In Work", Oracle_Template:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
 				//	{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"buy", SortValue:"2"},
 				//];
-				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable(),"AssignedPlantsTable"));
+				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable(),"AssigendPlantTable"));
 			},
 	
 			partTable: function(sPartId,partName,partTitle,parttable) { 
@@ -457,12 +459,17 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					tableData.classes.push(rowData);					
 				});
 				if(tableData.classes){
-					comWidget.updateClassAttribuets(tableData);
+					//comWidget.updateClassAttribuets(tableData);
 				}
+				console.log("avaliable------1--->"+whereUsedTable.AvaliablePlantTable);
+				console.log("avaliable------2--->"+whereUsedTable.AssigendPlantTable);
+
+
+
 			},
 			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
-				console.log("final--->"+JSON.stringify(tableData));
+				-
 				console.log("InitialAssignedClasses--------->"+JSON.stringify(InitialAssignedClasses));
 				InitialAssignedClasses.classes.forEach(intclass => {
 					tableData.classes.forEach(tableitem => {
@@ -485,22 +492,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							if( MBOMValue !== tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
 							}
-						
-						} else {
-							//new RowAdded
 						}						
 					});
 				});
-				console.log("updateditem------"+JSON.stringify(updateditem));
 				if (JSON.stringify(updateditem) !== "{}") {
 					//Update cestep
 					comWidget.getProductcestamp();
 					updateditem["cestamp"] = cestamp;
 					let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 					urlObjWAF += sMainPartId;
-					console.log("updateditem--11111----");
 					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
-					console.log("updateditem--2222222----");
 					if(response.status){
 						console.log("updateditem------"+JSON.stringify(response.output));
 					}else {
