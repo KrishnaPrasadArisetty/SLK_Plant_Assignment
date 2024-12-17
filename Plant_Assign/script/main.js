@@ -77,6 +77,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					  }
 					]
 				  };
+				  console.log("body===="+body);
 				return comWidget.callwebService("POST",urlObjWAF,body);
 			},
 			AddPlantPopup : function(){
