@@ -70,20 +70,20 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			AddPlantPopup : function(){
 				let assignedTable = whereUsedTable.AssigendPlantTableData;
-				assignedTable.getRows().forEach(row => {
-					let rowData = row.getData();  // Get data for the row
-					console.log(rowData);         // Logs the row data
-				});
-
+				let allRows = assignedTable.getData();
+				let maxId = Math.max(...allRows.map(row => row.id)) + 1;
+				console.log("maxId===="+maxId);
 				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
 				if (selectedRows.length > 0) {  // Check if any rows are selected
-				    selectedRows.forEach(row => {
+				    selectedRows.forEach((row,index) => {
 				        let rowData = row.getData();
 				        const matchedClass = ALLClasses.classes.find(cls => cls.title === rowData.Plant);
 						if (matchedClass) {
 							console.log("matchedClass---->"+matchedClass.id);
 							console.log("plant---->"+rowData.Plant);
-							//matchedResults.push({id: matchedClass.id, plant: row.Plant});
+							assignedTable.addRow({ 
+								id: maxId+index+1, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", Make_Buy:"Buy", SortValue:""
+							});
 						}
 						row.delete();
 				    });
