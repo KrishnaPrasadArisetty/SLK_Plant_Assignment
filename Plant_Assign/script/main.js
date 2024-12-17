@@ -4,7 +4,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		var urlBASE,csrfToken,securityContext;
 		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses;
 		
-		securityContext= "ctx%3A%3AVPLMProjectLeader.BU-0000001.Micro%20Motion",
+		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
 
@@ -97,7 +97,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							const result = comWidget.classifyProduct(matchedClass.id);
 							if(result.status){
 								assignedTable.addRow({ 
-									id: maxId+index+1, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
+									id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
 								});
 							}							
 						}
