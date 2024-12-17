@@ -443,7 +443,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			SaveData : function (){
 				let tableData = { "classes" : [] }
-				let assignedplants = widget.body.querySelector('#AssignedPlantsTable');
+				let assignedplants = widget.body.querySelector('#AssigendPlantTable');
 				let theInput = assignedplants.querySelector('.tabulator-tableholder');  
 				let rows = theInput.querySelectorAll('.tabulator-row');
 				rows.forEach(row => {
