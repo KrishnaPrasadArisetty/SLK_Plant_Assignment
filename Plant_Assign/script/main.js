@@ -69,14 +69,20 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 			},
 			AddPlantPopup : function(){
+				let assignedTable = whereUsedTable.AssigendPlantTableData;
+				assignedTable.getRows().forEach(row => {
+					let rowData = row.getData();  // Get data for the row
+					console.log(rowData);         // Logs the row data
+				});
+
 				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
 				if (selectedRows.length > 0) {  // Check if any rows are selected
 				    selectedRows.forEach(row => {
 				        let rowData = row.getData();
-				        const matchedClass = ALLClasses.classes.find(cls => cls.title === row.Plant);
+				        const matchedClass = ALLClasses.classes.find(cls => cls.title === rowData.Plant);
 						if (matchedClass) {
 							console.log("matchedClass---->"+matchedClass.id);
-							console.log("plant---->"+row.Plant);
+							console.log("plant---->"+rowData.Plant);
 							//matchedResults.push({id: matchedClass.id, plant: row.Plant});
 						}
 						row.delete();
