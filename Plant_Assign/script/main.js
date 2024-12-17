@@ -94,7 +94,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							console.log("plant---->"+rowData.Plant);
 							
 							//classify product to class
-							const result = classifyProduct(matchedClass.id,sMainPartId);
+							const result = comWidget.classifyProduct(matchedClass.id,sMainPartId);
 							if(result.status){
 								assignedTable.addRow({ 
 									id: maxId+index+1, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
