@@ -68,30 +68,15 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					},
 				});
 			},
-			AddPlantPopup : function(mainDiv){
-				const popup = widget.createElement('div');
-				popup.id = 'popup';
-				popup.classList.add('popup');
-
-				const popupContent = widget.createElement('div');
-				popupContent.classList.add('popup-content');
-				popup.style =  "display: none; position: fixed; top: 20px; right: -250px; width: 250px; height: 200px; background-color: white;border: 1px solid #ccc;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);transition: right 0.3s ease ";
-				const closePopupBtn = widget.createElement('span');
-				closePopupBtn.id = 'closePopupBtn';
-				closePopupBtn.classList.add('close');
-				closePopupBtn.innerHTML = '&times;';
-
-				const popupTitle = widget.createElement('h3');
-				popupTitle.innerText = 'Avaliable Plants';
-
-				const popupParagraph = widget.createElement('p');
-				popupParagraph.innerText = 'This is a small popup that appears on the right of the screen.';
-
-				popupContent.appendChild(closePopupBtn);
-				popupContent.appendChild(popupTitle);
-				popupContent.appendChild(popupParagraph);
-				popup.appendChild(popupContent);
-				container.appendChild(popup);
+			AddPlantPopup : function(){
+				//let Avalrows = whereUsedTable.AvaliablePlantTableData.getRows();
+				//let Assignrows = whereUsedTable.AssigendPlantTableData.getRows();
+				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();t
+				console.log("selectedRows--->"+selectedRows);  
+				selectedRows.forEach(row => {
+					let rowData = row.getData();
+					console.log(rowData);  
+				});
 
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
@@ -239,7 +224,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var AddPlantsbutton = document.createElement('button', {'class':'dynamic-button'});
 				AddPlantsbutton.style = "border-radius: 4px; padding: 1px 10px; font-size: 12px; margin: 10px; background-color: #f1f1f1; color: black; border: none; cursor: pointer";
 				AddPlantsbutton.innerHTML = "Add Plants";
-				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup(mainDiv));
+				AddPlantsbutton.addEventListener('click', () => comWidget.AddPlantPopup());
 				ssubDiv.appendChild(AddPlantsbutton);
 
 				var clearbutton = document.createElement('button', {'class':'dynamic-button'});
