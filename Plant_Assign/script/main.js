@@ -461,8 +461,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(tableData.classes){
 					//comWidget.updateClassAttribuets(tableData);
 				}
-				console.log("avaliable------1--->"+whereUsedTable.AvaliablePlantTable);
-				console.log("avaliable------2--->"+whereUsedTable.AssigendPlantTable);
+				console.log("avaliable------1--->"+whereUsedTable.AvaliablePlantTableData);
+				console.log("avaliable------2--->"+whereUsedTable.AssigendPlantTableData);
 
 
 
