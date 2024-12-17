@@ -69,12 +69,17 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 			},
 			AddPlantPopup : function(){
-				console.log("ALLClasses===>"+ALLClasses);
 				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
 				if (selectedRows.length > 0) {  // Check if any rows are selected
 				    selectedRows.forEach(row => {
 				        let rowData = row.getData();
-				        console.log(rowData);  // Log the row data
+				        const matchedClass = ALLClasses.classes.find(cls => cls.title === row.Plant);
+						if (matchedClass) {
+							console.log("matchedClass---->"+matchedClass.id);
+							console.log("plant---->"+row.Plant);
+							//matchedResults.push({id: matchedClass.id, plant: row.Plant});
+						}
+						row.delete();
 				    });
 				} else {
 				    alert("Please select at least one row from available plantsppp");  // Show alert if no rows are selected
