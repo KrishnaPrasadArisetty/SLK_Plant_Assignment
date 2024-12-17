@@ -70,7 +70,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					"ClassID": sClassId,
 					"ObjectsToClassify": [
 					  {
-						"source": urlBASE,
+						"source": urlBASE.slice(0, -1),
 						"type": "VPMReference",
 						"identifier": sMainPartId,
 						"relativePath": "/resources/v1/modeler/dseng/dseng:EngItem/"+sMainPartId
