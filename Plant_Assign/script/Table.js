@@ -47,10 +47,10 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 columns:TableColumn,
             });
 
-            if (tableName === "AssigendPlantTable") {
-                whereUsedTable.AssigendPlantTable = table;
-            } else if (tableName === "AvaliablePlantTable") {
-                whereUsedTable.AvaliablePlantTable = table;
+            if (Tableid === "AssigendPlantTable") {
+                whereUsedTable.AssigendPlantTableData = table;
+            } else if (Tableid === "AvaliablePlantTable") {
+                whereUsedTable.AvaliablePlantTableData = table;
             }else {
                 whereUsedTable.tableData = table;
             }
