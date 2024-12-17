@@ -78,7 +78,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					]
 				  };
 				  console.log("body===="+body);
-				return comWidget.callwebService("POST",urlObjWAF,body);
+				return comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 			},
 			AddPlantPopup : function(){
 				let assignedTable = whereUsedTable.AssigendPlantTableData;
@@ -474,12 +474,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					tableData.classes.push(rowData);					
 				});
 				if(tableData.classes){
-					//comWidget.updateClassAttribuets(tableData);
+					comWidget.updateClassAttribuets(tableData);
 				}
-				console.log("avaliable------1--->"+whereUsedTable.AvaliablePlantTableData);
-				console.log("avaliable------2--->"+whereUsedTable.AssigendPlantTableData);
-
-
 
 			},
 			updateClassAttribuets : function(tableData) {
