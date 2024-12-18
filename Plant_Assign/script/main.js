@@ -428,7 +428,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "MFG Status", field: "MFG_Status" },
                     { title: "Change", field: "Change" },
                     { title: "Change Status", field: "Change_Status" },
-                    { title: "Oracle Template", field: "Oracle_Template", editor:"input" },
+                    { title: "Oracle Template", field: "Oracle_Template"},
                     { title: "ERP Status", field: "ERP_Status" },
                     { title: "ERP Export", field: "ERP_Export", editor:"list", editorParams:{values:{"Yes":"Yes", "No":"No"}}},
                     { title: "Lead Plant", field: "Lead_Plant", editor:"list", editorParams:{values:{"true":"true", "false":"false"}}},
@@ -463,19 +463,19 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					tableData.classes.forEach(tableitem => {
 						let plantName  = tableitem.Plant.slice(6);
 						if (intclass.title == tableitem.Plant) {
-							//old row updated
-							if(intclass.oracletemplate !== tableitem.Oracle_Template){
-								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
-							}							
+							//old row updated	
 							if(intclass.ERPExport !== tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
+								intclass["ERPExport"] = tableitem.ERP_Export;
 							}
 							if(String(intclass.LeadPlant) !== String(tableitem.Lead_Plant)){
 								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
+								intclass["LeadPlant"] = tableitem.Lead_Plant;
 							}
 							const MBOMValue = intclass.mbom ? "Make" : "Buy";
 							if( MBOMValue !== tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
+								intclass["mbom"] = tableitem.MBom === "Make" ? true : false;
 							}
 						}						
 					});
@@ -492,26 +492,24 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						// call classify product to class..
 						const result = comWidget.classifyProduct(matchedClass.id);
 						if(result.status){								
-								//call is success prepare attributes update
-							if(tableitem.Oracle_Template){
-								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
-							} 
-
+								//call is success prepare attributes update							
 							if(tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
+								classObject["ERPExport"] = tableitem.ERP_Export;
 							}
 							if(String(tableitem.Lead_Plant)){
 								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
+								classObject["LeadPlant"] = tableitem.Lead_Plant;
 							}
 							if(tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
+								classObject["mbom"] = tableitem.MBom === "Make" ? true : false;
 							}	
 						}
-																		
+						InitialAssignedClasses.classes.push(classObject);									
 					}
 				});
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
-				//updateditem = {};
 				if (JSON.stringify(updateditem) !== "{}") {
 					//Update cestep
 					comWidget.getProductcestamp();
@@ -525,7 +523,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("updateditem--Error----");
 					}
 				}
-				InitialAssignedClasses = comWidget.getAssignedClassDetails(sMainPartId);
+				//InitialAssignedClasses = comWidget.getAssignedClassDetails(sMainPartId);
 			},
 			getProductcestamp : function() { 
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
