@@ -564,6 +564,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					});
 					console.log("classifyBody----"+JSON.stringify(classifyBody));
 					//call prod classfiywebservice
+					if(classifyBody.ObjectsToClassify){
+						let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";				
+						let response =  comWidget.callwebService("POST",urlObjWAF,JSON.stringify(classifyBody));
+					}
 				});
 
 			},
