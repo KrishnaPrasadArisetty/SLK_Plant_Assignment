@@ -300,8 +300,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dseng/dseng:EngItem/";
 				urlObjWAF += sMainPartId;
 				urlObjWAF += "/expand";
-				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
-				let childDetails =comWidget.callwebService("POST",urlObjWAF,body);
+				let body  = "{expandDepth: 1,type_filter_bo: [VPMReference],type_filter_rel: [VPMInstance]}";
+				let childDetails =comWidget.callwebService("POST",urlObjWAF,JSON.parse(body));
 				console.log("childDetails==="+childDetails);
 			},
 			getLibClassDetails: function(sLibId) {
