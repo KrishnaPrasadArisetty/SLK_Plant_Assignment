@@ -489,8 +489,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						const classid = ALLClasses.classes.find(classitem => classitem.title === tableitem.Plant)?.id;
 						console.log("classid----"+classid);
 						let classObject = {"id":classid,"title":tableitem.Plant};
-						// call classify product to class..
-						const result = comWidget.classifyProduct(matchedClass.id);
+						// call classify product to class..nnnnn
+						const result = comWidget.classifyProduct(classid);
+
 						if(result.status){								
 								//call is success prepare attributes update							
 							if(tableitem.ERP_Export){
