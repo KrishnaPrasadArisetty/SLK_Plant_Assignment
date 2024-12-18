@@ -89,23 +89,14 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if (selectedRows.length > 0) {  // Check if any rows are selected
 				    selectedRows.forEach((row,index) => {
 				        let rowData = row.getData();
-				        const matchedClass = ALLClasses.classes.find(cls => cls.title === rowData.Plant);
-						if (matchedClass) {
-							console.log("matchedClass---->"+matchedClass.id);
 							console.log("plant---->"+rowData.Plant);
-							
-							//classify product to class
-							const result = comWidget.classifyProduct(matchedClass.id);
-							if(result.status){
 								assignedTable.addRow({ 
-									id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", SortValue:""
+									id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERPStatus:"true",ERP_Export:"No", Lead_Plant:"False", MBom:"Buy", Sort_Value:""
 								});
-							}							
-						}
 						row.delete();
 				    });
 				} else {
-				    alert("Please select at least one row from available plantsppp");  // Show alert if no rows are selected
+				    alert("Please select at least one row from available plants");  // Show alert if no rows are selected
 				}
 
 			},
@@ -495,6 +486,22 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							}
 						}						
 					});
+				});
+
+				//find out additional rows-->
+				const resultList = tableData.classes.map(tableClass => {
+					const matchedClass = InitialAssignedClasses.classes.find(initialClass => initialClass.title === tableClass.Plant);
+					if (!matchedClass) { 
+						const classid = ALLClasses.find(classitem => classitem.title === tableClass.Plant)?.id;
+						console.log("classid----"+classid);
+						// call classify product to class..
+						//const result = comWidget.classifyProduct(matchedClass.id);
+						//	if(result.status){								
+								//call is success prepare attributes update
+							//}
+
+						
+					}
 				});
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
 				updateditem = {};

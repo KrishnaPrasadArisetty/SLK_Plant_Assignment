@@ -36,7 +36,7 @@ define("Plant/script/table", ["tabulator", "css!tabulatorCss"], function (Tabula
                 },
                 movableColumns: true,
                 selectableRowsRangeMode: "click",
-                placeholder: "Item is not used in any structure",
+                placeholder: "No Plants Avaliable",
                 rowHeader: {
                     formatter: "rowSelection", titleFormatter: "rowSelection", titleFormatterParams: {
                         rowRange: "active" //only toggle the values of the active filtered rows
