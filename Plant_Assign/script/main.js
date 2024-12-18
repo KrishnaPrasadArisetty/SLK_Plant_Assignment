@@ -293,6 +293,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				
 				// call get Prod childs
 				productChilds = comWidget.getChildParts()
+				console.log("productChilds----"+productChilds);
 
 			},
 			getChildParts: function() {
