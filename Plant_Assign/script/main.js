@@ -492,7 +492,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				const resultList = tableData.classes.map(tableClass => {
 					const matchedClass = InitialAssignedClasses.classes.find(initialClass => initialClass.title === tableClass.Plant);
 					if (!matchedClass) { 
-						const classid = ALLClasses.find(classitem => classitem.title === tableClass.Plant)?.id;
+						const classid = ALLClasses.classes.find(classitem => classitem.title === tableClass.Plant)?.id;
 						console.log("classid----"+classid);
 						// call classify product to class..
 						//const result = comWidget.classifyProduct(matchedClass.id);
