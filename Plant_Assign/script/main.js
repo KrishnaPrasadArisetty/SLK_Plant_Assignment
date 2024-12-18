@@ -394,7 +394,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					InitialAssignedClasses.classes.forEach((Plantclass,index) => {
 					const plantName = Plantclass.title.slice(6);
 					console.log("plantName-------->"+plantName);
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", SortValue:"1"});
+					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", Sort_Value:"1"});
 				});
 				console.log("ClassTableData-------->"+JSON.stringify(ClassTableData));
 				//aaaaa
@@ -457,35 +457,14 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return columns;
 			},
 			SaveData : function (){
+				let tableData = { "classes" : [] }
 				let assignedTable = whereUsedTable.AssigendPlantTableData;
 				assignedTable.getRows().forEach(row => {
-					console.log("row --->"+row);
-					console.log("row data --->"+row.getData());
-					row.getCells().forEach(cell => {
-						console.log("New --->"+cell);
-					});
-
-				});
-
-				let tableData = { "classes" : [] }
-				let assignedplants = widget.body.querySelector('#AssigendPlantTable');
-				let theInput = assignedplants.querySelector('.tabulator-tableholder');  
-				let rows = theInput.querySelectorAll('.tabulator-row');
-				rows.forEach(row => {
-				    let rowData = {};
-				    let cells = row.querySelectorAll('.tabulator-cell');
-				    cells.forEach(cell => {
-				        let field = cell.getAttribute('tabulator-field'); 
-				        let value = cell.innerText.trim();
-						if (field !== null) {
-					        rowData[field] = value;
-						}
-				    });
-					tableData.classes.push(rowData);					
+					tableData.classes.push(row.getData());
 				});
 				console.log("tableData --->"+JSON.stringify(tableData));
 				if(tableData.classes){
-					//comWidget.updateClassAttribuets(tableData);
+					comWidget.updateClassAttribuets(tableData);
 				}
 
 			},
@@ -517,6 +496,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						}						
 					});
 				});
+				console.log("updateditem--final----"+JSON.stringify(updateditem));
+				updateditem = {};
 				if (JSON.stringify(updateditem) !== "{}") {
 					//Update cestep
 					comWidget.getProductcestamp();
