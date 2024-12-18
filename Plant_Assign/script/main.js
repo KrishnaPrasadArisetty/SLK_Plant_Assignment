@@ -301,8 +301,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += sMainPartId;
 				urlObjWAF += "/expand";
 				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
-				let childDetails =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
-				console.log("childDetails==="+childDetails);
+				let childDetails = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
+				let productChilds = data.member
+					.filter(member => member.type === "VPMReference" && member.id !== sMainPartId ).map(member => member.id);
+				return productChilds;
 			},
 			getLibClassDetails: function(sLibId) {
 				ALLClasses = { "classes": [] };
