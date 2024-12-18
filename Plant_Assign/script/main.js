@@ -513,9 +513,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
 								classObject["mbom"] = tableitem.MBom === "Make" ? true : false;
 							}
-							onsole.log("classObject----"+JSON.stringify(classObject));
-						InitialAssignedClasses.classes.push(classObject);
+							console.log("classObject----"+JSON.stringify(classObject));							
 						console.log("InitialAssignedClasses--before----"+JSON.stringify(InitialAssignedClasses.classes));
+						InitialAssignedClasses.classes.push(classObject);
 					}
 				});
 
