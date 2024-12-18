@@ -533,16 +533,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					if(response.status){
 						console.log("Update----Success------");
 						// do child propagation
-						let propdetails = {"Classes" :[]};
+						let propdetails = [];
 						Object.entries(updateditem).forEach(([key, value]) => {
 							if (key.toLowerCase().includes("mbom") && value === true) {
 								const plantName = key.replace("mbom", "");
 								console.log("plantName------"+plantName);
 								const matchingEntry = ALLClasses.Classes.find(item => item.title === "Plant "+plantName);
-								propdetails.Classes.push({"id":matchingEntry.id, "attribute":plantName+"mbom"});
+								propdetails.push(matchingEntry.id);
 							}
 						});
-						if (propdetails.Classes){
+						if (propdetails){
 							//call propogate Method
 							comWidget.propagateChilds(propdetails);
 						}
@@ -553,9 +553,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			propagateChilds : function(propdetails) {
 				let classifyBody = {}; 
-				var UpdateBody = {};
-				propdetails.classes.forEach(classitems =>{
-					let classifyBody = {"ClassID": classitems.id, "ObjectsToClassify": []};
+				propdetails.forEach(classitems =>{
+					let classifyBody = {"ClassID": classitems, "ObjectsToClassify": []};
 					let prodbody ={"source": urlBASE.slice(0, -1),"type": "VPMReference"};
 					productChilds.forEach(prodid =>{
 						prodbody["identifier"] = prodid;
@@ -563,10 +562,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						classifyBody.ObjectsToClassify.push(prodbody);
 					});
 					console.log("classifyBody----"+JSON.stringify(classifyBody));
-					UpdateBody[classitems.attribute] = false;
 					//call prod classfiywebservice
 				});
-				console.log("UpdateBody----"+JSON.stringify(UpdateBody));
 
 			},
 			getProductcestamp : function() { 
