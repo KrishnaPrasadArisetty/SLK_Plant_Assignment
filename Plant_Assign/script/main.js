@@ -300,35 +300,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dseng/dseng:EngItem/";
 				urlObjWAF += sMainPartId;
 				urlObjWAF += "/expand";
-				var headerWAF = {
-					SecurityContext: securityContext,
-					//Accept: "application/json",
-					ENO_CSRF_TOKEN : csrfToken,
-					//"Content-Type": "application/json"
-				};
-
-				let body = '{"expandDepth": 1, "type_filter_bo": ["VPMReference"], "type_filter_rel": ["VPMInstance"]}';
-				//let childDetails =comWidget.callwebService("POST",urlObjWAF,JSON.parse(body));
-				let returnobj = {};
-				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
-					method: methodWAF,
-					headers: headerWAF,
-					data: JSON.parse(body),
-					type: "json",
-					async : false,
-					onComplete: function(dataResp) {
-						returnobj.status = true;
-						returnobj.output = dataResp;
-						console.log("kp--CallWebService--- >> ",dataResp);
-					},
-					onFailure: function(error, backendresponse, response_hdrs) {
-						console.log("Failedddddd",error.message);
-						returnobj.status = false;
-						console.log(response_hdrs);
-						widget.body.innerHTML += "<p>Something Went Wrong"+error+"</p>";
-					}
-				})
-				console.log("dataResp==="+dataResp);
+				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
+				let childDetails =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
+				console.log("childDetails==="+childDetails);
 			},
 			getLibClassDetails: function(sLibId) {
 				ALLClasses = { "classes": [] };
