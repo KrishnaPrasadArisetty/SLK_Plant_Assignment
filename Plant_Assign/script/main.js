@@ -2,7 +2,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var urlBASE,csrfToken,securityContext;
-		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses;
+		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses,productChilds;
 		
 		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
 		urlBASE = "";
@@ -11,10 +11,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		//------
 
 		var comWidget = {
-
 			onLoad: function() { 
 				console.log("krishna-Inside-->");
-								
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : ''});
 				var dropimage = widget.createElement('img', { 'src': 'https://krishnaprasadarisetty.github.io/SLK_Boss_ATT/BO_ATT/Images/dropImage.png', 'alt': 'Dropbox Image' });
@@ -292,6 +290,19 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 				widget.body.innerHTML="";
 				widget.body.appendChild(container);
+				
+				// call get Prod childs
+				productChilds = comWidget.getChildParts()
+
+			},
+			getChildParts: function() {
+				
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dseng/dseng:EngItem/";
+				urlObjWAF += sMainPartId;
+				urlObjWAF += "/expand";
+				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
+				let childDetails =comWidget.callwebService("POST",urlObjWAF,body);
+				console.log("childDetails==="+childDetails);
 			},
 			getLibClassDetails: function(sLibId) {
 				ALLClasses = { "classes": [] };
