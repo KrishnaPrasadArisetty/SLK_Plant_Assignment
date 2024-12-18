@@ -385,14 +385,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					InitialAssignedClasses.classes.forEach((Plantclass,index) => {
 					const plantName = Plantclass.title.slice(6);
 					console.log("plantName-------->"+plantName);
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:Plantclass.ERPStatus,ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", Sort_Value:"1"});
+					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:"",ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", Sort_Value:""});
 				});
 				console.log("ClassTableData-------->"+JSON.stringify(ClassTableData));
-				//aaaaa
-				//ClassTableData = [
-				//	{id:1, Plant:"MVO", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", Change_Status:"In Work", Oracle_Template:"template-003", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"make", SortValue:"1"},
-				//	{id:1, Plant:"MMB", Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-000004", ChangeStatus:"In Work", OracleTemplate:"template-004", ERPStatus:"true",ERP_Export:"Yes", Lead_Plant:"False", Make_Buy:"buy", SortValue:"2"},
-				//];
+				
 				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable(),"AssigendPlantTable"));
 			},
 	
@@ -433,7 +429,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
                     { title: "Change", field: "Change" },
                     { title: "Change Status", field: "Change_Status" },
                     { title: "Oracle Template", field: "Oracle_Template", editor:"input" },
-                    { title: "ERP Status", field: "ERP_Status", editor:"list", editorParams:{values:{"true":"true", "true":"true"}}},
+                    { title: "ERP Status", field: "ERP_Status" },
                     { title: "ERP Export", field: "ERP_Export", editor:"list", editorParams:{values:{"Yes":"Yes", "No":"No"}}},
                     { title: "Lead Plant", field: "Lead_Plant", editor:"list", editorParams:{values:{"true":"true", "false":"false"}}},
                     { title: "MBom", field: "MBom", editor:"list", editorParams:{values:{"Make":"Make", "Buy":"Buy"}}},
@@ -470,10 +466,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							//old row updated
 							if(intclass.oracletemplate !== tableitem.Oracle_Template){
 								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
-							}
-							if(intclass.ERPStatus !== tableitem.ERP_Status){
-								updateditem[plantName+"ERPStatus"] = tableitem.ERP_Status;
-							}
+							}							
 							if(intclass.ERPExport !== tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
 							}
@@ -508,13 +501,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								classObject[oracletemplate] = "";
 							}
 
-							if(tableitem.ERP_Status){
-								updateditem[plantName+"ERPStatus"] = tableitem.ERP_Status;
-								classObject[ERPStatus] = tableitem.ERP_Status;
-							} else {
-								classObject[ERPStatus] = "";
-							}
-
 							if(tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
 								classObject[ERPExport] = tableitem.ERP_Export;
@@ -530,6 +516,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						InitialAssignedClasses.classes.push(classObject);
 					}
 				});
+
+				console.log("InitialAssignedClasses--final----"+JSON.stringify(InitialAssignedClasses.classes));
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
 				updateditem = {};
 				if (JSON.stringify(updateditem) !== "{}") {
