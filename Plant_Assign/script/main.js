@@ -62,7 +62,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					},
 				});
 			},
-			classifyProduct : function(sClassId) {
+			classifyProduct : function(sClassId,sPartid) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
 				let body = {
 					"ClassID": sClassId,
@@ -70,12 +70,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					  {
 						"source": urlBASE.slice(0, -1),
 						"type": "VPMReference",
-						"identifier": sMainPartId,
-						"relativePath": "/resources/v1/modeler/dseng/dseng:EngItem/"+sMainPartId
+						"identifier": sPartid,
+						"relativePath": "/resources/v1/modeler/dseng/dseng:EngItem/"+sPartid
 					  }
 					]
 				  };
-				  console.log("body===="+body);
 				return comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 			},
 			AddPlantPopup : function(){
@@ -302,9 +301,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "/expand";
 				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
 				let childDetails = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
-				let productChilds = data.member
+				let childs = data.member
 					.filter(member => member.type === "VPMReference" && member.id !== sMainPartId ).map(member => member.id);
-				return productChilds;
+				return childs;
 			},
 			getLibClassDetails: function(sLibId) {
 				ALLClasses = { "classes": [] };
@@ -503,7 +502,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("classid----"+classid);
 						let classObject = {"id":classid,"title":tableitem.Plant};
 						// call classify product to class..nnnnn
-						const result = comWidget.classifyProduct(classid);
+						const result = comWidget.classifyProduct(classid,sMainPartId);
 
 						if(result.status){								
 								//call is success prepare attributes update							
@@ -524,7 +523,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}
 				});
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
-				if (JSON.stringify(updateditem) !== "{}") {
+				if (JSON.stringify(updateditem) !== "{}") {					
 					//Update cestep
 					comWidget.getProductcestamp();
 					updateditem["cestamp"] = cestamp;
@@ -532,13 +531,43 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					urlObjWAF += sMainPartId;
 					let  response =comWidget.callwebService("PATCH",urlObjWAF,JSON.stringify(updateditem));
 					if(response.status){
-						console.log("updateditem------"+JSON.stringify(response.output));
-					}else {
-						console.log("updateditem--Error----");
+						console.log("Update----Success------");
+						// do child propagation
+						let propdetails = {"Classes" :[]};
+						Object.entries(updateditem).forEach(([key, value]) => {
+							if (key.toLowerCase().includes("mbom") && value === true) {
+								const plantName = key.replace("mbom", "");
+								console.log("plantName------"+plantName);
+								const matchingEntry = ALLClasses.Classes.find(item => item.title === "Plant "+plantName);
+								propdetails.Classes.push({"id":matchingEntry.id, "attribute":plantName+"mbom"});
+							}
+						});
+						if (propdetails.Classes){
+							//call propogate Method
+							comWidget.propagateChilds(propdetails);
+						}
 					}
 				}
 				//InitialAssignedClasses = comWidget.getAssignedClassDetails(sMainPartId);
 				console.log("InitialAssignedClasses--final----"+JSON.stringify(InitialAssignedClasses.classes));
+			},
+			propagateChilds : function(propdetails) {
+				let classifyBody = {}; 
+				var UpdateBody = {};
+				propdetails.classes.forEach(classitems =>{
+					let classifyBody = {"ClassID": classitems.id, "ObjectsToClassify": []};
+					let prodbody ={"source": urlBASE.slice(0, -1),"type": "VPMReference"};
+					productChilds.forEach(prodid =>{
+						prodbody["identifier"] = prodid;
+						prodbody["relativePath"] = "/resources/v1/modeler/dseng/dseng:EngItem/"+prodid;
+						classifyBody.ObjectsToClassify.push(prodbody);
+					});
+					console.log("classifyBody----"+JSON.stringify(classifyBody));
+					UpdateBody[classitems.attribute] = false;
+					//call prod classfiywebservice
+				});
+				console.log("UpdateBody----"+JSON.stringify(UpdateBody));
+
 			},
 			getProductcestamp : function() { 
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
