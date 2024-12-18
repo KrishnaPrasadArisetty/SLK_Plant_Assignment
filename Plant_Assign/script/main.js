@@ -490,10 +490,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("classid----"+classid);
 						let classObject = {"id":classid,"title":tableitem.Plant};
 						// call classify product to class..
-						//const result = comWidget.classifyProduct(matchedClass.id);
-						//	if(result.status){								
+						const result = comWidget.classifyProduct(matchedClass.id);
+						if(result.status){								
 								//call is success prepare attributes update
-							//}
 							if(tableitem.Oracle_Template){
 								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
 							} 
@@ -506,11 +505,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							}
 							if(tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
-							}												
+							}	
+						}
+																		
 					}
 				});
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
-				updateditem = {};
+				//updateditem = {};
 				if (JSON.stringify(updateditem) !== "{}") {
 					//Update cestep
 					comWidget.getProductcestamp();
