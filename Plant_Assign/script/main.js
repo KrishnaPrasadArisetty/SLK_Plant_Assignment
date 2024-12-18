@@ -313,7 +313,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
 					method: methodWAF,
 					headers: headerWAF,
-					data: urlObjWAF,JSON.parse(body),
+					data: JSON.parse(body),
 					type: "json",
 					async : false,
 					onComplete: function(dataResp) {
