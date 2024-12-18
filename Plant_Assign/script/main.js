@@ -458,7 +458,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
 				
-				console.log("InitialAssignedClasses--------->"+JSON.stringify(InitialAssignedClasses));
+				console.log("InitialAssignedClasses-----before---->"+JSON.stringify(InitialAssignedClasses));
 				InitialAssignedClasses.classes.forEach(intclass => {
 					tableData.classes.forEach(tableitem => {
 						let plantName  = tableitem.Plant.slice(6);
