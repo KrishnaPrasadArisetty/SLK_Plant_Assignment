@@ -491,7 +491,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
-				-
+				
 				console.log("InitialAssignedClasses--------->"+JSON.stringify(InitialAssignedClasses));
 				InitialAssignedClasses.classes.forEach(intclass => {
 					tableData.classes.forEach(tableitem => {
