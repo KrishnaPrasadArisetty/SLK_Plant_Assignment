@@ -524,6 +524,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}
 				}
 				//InitialAssignedClasses = comWidget.getAssignedClassDetails(sMainPartId);
+				console.log("InitialAssignedClasses--final----"+JSON.stringify(InitialAssignedClasses.classes));
 			},
 			getProductcestamp : function() { 
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
