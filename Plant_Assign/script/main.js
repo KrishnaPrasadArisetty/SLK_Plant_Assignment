@@ -482,13 +482,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				});
 
 				//find out additional rows-->
-				const resultList = tableData.classes.map(tableClass => {
-					const matchedClass = InitialAssignedClasses.classes.find(initialClass => initialClass.title === tableClass.Plant);
+				const resultList = tableData.classes.map(tableitem => {
+					const matchedClass = InitialAssignedClasses.classes.find(initialClass => initialClass.title === tableitem.Plant);
 					if (!matchedClass) {
 						let plantName  = tableitem.Plant.slice(6);
-						const classid = ALLClasses.classes.find(classitem => classitem.title === tableClass.Plant)?.id;
+						const classid = ALLClasses.classes.find(classitem => classitem.title === tableitem.Plant)?.id;
 						console.log("classid----"+classid);
-						let classObject = {"id":classid,"title":tableClass.Plant};
+						let classObject = {"id":classid,"title":tableitem.Plant};
 						// call classify product to class..
 						//const result = comWidget.classifyProduct(matchedClass.id);
 						//	if(result.status){								
