@@ -491,7 +491,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				//find out additional rows-->
 				const resultList = tableData.classes.map(tableClass => {
 					const matchedClass = InitialAssignedClasses.classes.find(initialClass => initialClass.title === tableClass.Plant);
-					if (!matchedClass) { 
+					if (!matchedClass) {
+						let plantName  = tableitem.Plant.slice(6);
 						const classid = ALLClasses.classes.find(classitem => classitem.title === tableClass.Plant)?.id;
 						console.log("classid----"+classid);
 						// call classify product to class..
@@ -499,7 +500,21 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						//	if(result.status){								
 								//call is success prepare attributes update
 							//}
-
+							if(tableitem.Oracle_Template){
+								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
+							}
+							if(tableitem.ERP_Status){
+								updateditem[plantName+"ERPStatus"] = tableitem.ERP_Status;
+							}
+							if(tableitem.ERP_Export){
+								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
+							}
+							if(String(tableitem.Lead_Plant)){
+								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
+							}
+							if(tableitem.MBom){
+								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
+							}
 						
 					}
 				});
