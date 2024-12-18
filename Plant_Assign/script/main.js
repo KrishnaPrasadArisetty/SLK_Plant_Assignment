@@ -329,7 +329,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
-			getAssignedClassDetails: function(sPartId,ALLClasses) {
+			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
 				urlObjWAF += sPartId;
@@ -371,7 +371,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ALLClasses = comWidget.getLibClassDetails(sLibId);
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
-				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId,ALLClasses);
+				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 				console.log("InitialAssignedClasses--:", InitialAssignedClasses); 
 
 				uniqueInAllclasses.classes = ALLClasses.classes.filter(allClass => 
@@ -496,30 +496,19 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							//}
 							if(tableitem.Oracle_Template){
 								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
-								classObject["oracletemplate"] = tableitem.Oracle_Template;
-							} else {
-								classObject["oracletemplate"] = "";
-							}
+							} 
 
 							if(tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
-								classObject["ERPExport"] = tableitem.ERP_Export;
 							}
 							if(String(tableitem.Lead_Plant)){
 								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
-								classObject["LeadPlant"] = tableitem.Lead_Plant;
 							}
 							if(tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
-								classObject["mbom"] = tableitem.MBom === "Make" ? true : false;
-							}
-							console.log("classObject----"+JSON.stringify(classObject));							
-						console.log("InitialAssignedClasses--before----"+JSON.stringify(InitialAssignedClasses.classes));
-						InitialAssignedClasses.classes.push(classObject);
+							}												
 					}
 				});
-
-				console.log("InitialAssignedClasses--final----"+JSON.stringify(InitialAssignedClasses.classes));
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
 				updateditem = {};
 				if (JSON.stringify(updateditem) !== "{}") {
@@ -535,6 +524,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("updateditem--Error----");
 					}
 				}
+				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 			},
 			getProductcestamp : function() { 
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
