@@ -495,6 +495,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let plantName  = tableitem.Plant.slice(6);
 						const classid = ALLClasses.classes.find(classitem => classitem.title === tableClass.Plant)?.id;
 						console.log("classid----"+classid);
+						let classObject = {"id":classid,"title":tableClass.Plant};
 						// call classify product to class..
 						//const result = comWidget.classifyProduct(matchedClass.id);
 						//	if(result.status){								
@@ -502,20 +503,31 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							//}
 							if(tableitem.Oracle_Template){
 								updateditem[plantName+"oracletemplate"] = tableitem.Oracle_Template;
+								classObject[oracletemplate] = tableitem.Oracle_Template;
+							} else {
+								classObject[oracletemplate] = "";
 							}
+
 							if(tableitem.ERP_Status){
 								updateditem[plantName+"ERPStatus"] = tableitem.ERP_Status;
+								classObject[ERPStatus] = tableitem.ERP_Status;
+							} else {
+								classObject[ERPStatus] = "";
 							}
+
 							if(tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
+								classObject[ERPExport] = tableitem.ERP_Export;
 							}
 							if(String(tableitem.Lead_Plant)){
 								updateditem[plantName+"LeadPlant"] = tableitem.Lead_Plant;
+								classObject[LeadPlant] = tableitem.Lead_Plant;
 							}
 							if(tableitem.MBom){
 								updateditem[plantName+"mbom"] = tableitem.MBom === "Make" ? true : false;
+								classObject[mbom] = tableitem.MBom === "Make" ? true : false;
 							}
-						
+						InitialAssignedClasses.classes.push(classObject);
 					}
 				});
 				console.log("updateditem--final----"+JSON.stringify(updateditem));
