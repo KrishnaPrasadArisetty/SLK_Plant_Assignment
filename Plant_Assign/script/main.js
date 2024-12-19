@@ -12,6 +12,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 		var comWidget = {
 			onLoad: function() { 
+
 				console.log("krishna-Inside-->");
 				// Create a dropbox for drag-and-drop functionality
 				var dropbox = widget.createElement('div', { 'class' : 'mydropclass', 'text' : ''});
@@ -30,6 +31,18 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				dropbox.inject(widget.body);
 				//
 				comWidget.setBaseURL();
+
+				//==========
+				let urlObjWAF = urlBASE+"resources/enorelnav/v2/navigate/setPreferences";
+				let body  = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
+							"relations":["caproposedwhere_from","caproposedwhere_to","carealizedwhere_from","carealizedwhere_to"],
+							"allRelationsMode":false,
+							"publicationsMode":false,
+							"computeWithInstances":false,
+							"attributesForView":["ds6w:label","ds6wg:revision","ds6w:status","ds6w:type","ds6w:modified","ds6w:responsible","ds6w:project","ds6w:dataSource","ds6w:identifier"],
+							"label":"ENXENG_AP-e1331143-1734517777960","lang":"en","ghostMode":false};
+				let response = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
+				console.log("cbcbb----->"+response.output);
 
 				// Set up drag-and-drop functionality
 				var theInput = widget.body.querySelector('.mydropclass');
