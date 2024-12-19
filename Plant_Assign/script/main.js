@@ -345,40 +345,28 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/";
 				urlObjWAF += sCAId;
 				urlObjWAF += "?fields=flowDown";
-				comWidget.callwebService("GET",urlObjWAF,"")
-				.then( response => {
-					return response;
-				  })
-				  .catch(error => {
-					console.error("Error fetching data:", error);
-				  });
+				return comWidget.callwebService("GET",urlObjWAF,"");
 			},
 			getCAData: function(flowDownCaId) {
 				let CADetails = {"CAAtt":[]};
-				comWidget.getCAdetails(flowDownCaId)
-				.then( response => {
+				let response = comWidget.getCAdetails(flowDownCaId);
+				if (response.status) {
 					response.output.isFlowDownOf.forEach(item =>{
 						let CAData = {};
 						if (item.type === "Change Action") {
 							console.log(item.identifier);
-							comWidget.getCAdetails(item.identifier)
-							.then( result => {
-								CAData["state"] = result.state;
-								CAData["title"] = result.title;
-							  })
-							  .catch(err => {
-								console.error("Error fetching data:", err);
-							  });							
+							let result = comWidget.getCAdetails(item.identifier);
+							if (result.status) {
+								CAData["state"] = result.output.state;
+								CAData["title"] = result.output.title;	
+							}						  							
 						}
 						CADetails.CAAtt.push(CAData);
 					});
 					CADetails["MCOState"] = response.state;
-					return CADetails;
-				  })
-				  .catch(error => {
-					console.error("Error fetching data:", error);
-				  });
-
+					
+				}
+				return CADetails;	
 			},
 			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
