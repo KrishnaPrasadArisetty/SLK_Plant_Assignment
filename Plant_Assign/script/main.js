@@ -341,6 +341,45 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
+			getCAdetails: function(sCAId) {
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/";
+				urlObjWAF += sCAId;
+				urlObjWAF += "?fields=flowDown";
+				comWidget.callwebService("GET",urlObjWAF,"")
+				.then( response => {
+					return response;
+				  })
+				  .catch(error => {
+					console.error("Error fetching data:", error);
+				  });
+			},
+			getCAData: function(flowDownCaId) {
+				let CADetails = {"CAAtt":[]};
+				comWidget.getCAdetails(flowDownCaId)
+				.then( response => {
+					response.output.isFlowDownOf.forEach(item =>{
+						let CAData = {};
+						if (item.type === "Change Action") {
+							console.log(item.identifier);
+							comWidget.getCAdetails(item.identifier)
+							.then( result => {
+								CAData["state"] = result.state;
+								CAData["title"] = result.title;
+							  })
+							  .catch(err => {
+								console.error("Error fetching data:", err);
+							  });							
+						}
+						CADetails.CAAtt.push(CAData);
+					});
+					CADetails["MCOState"] = response.state;
+					return CADetails;
+				  })
+				  .catch(error => {
+					console.error("Error fetching data:", error);
+				  });
+
+			},
 			getAssignedClassDetails: function(sPartId) {
 				let AssignedClasses = { "classes": [] };
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem/";
@@ -356,7 +395,27 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							if (classItem.ClassID === allClass.id) {
 								let classObject = {"id":allClass.id,"title":allClass.title};
 								classItem.Attributes.forEach(attItem => {
-									classObject[attItem.name.slice(3)] = attItem.value;
+									if(attItem.name.slice(3)==="FlowDownCA" && attItem.value) {
+										const flowDownCaId = attItem.value;
+										// call getCA details
+										comWidget.getCAData(flowDownCaId)
+										.then( CADetails => {
+											classObject["MCOStatus"] = CADetails.MCOState;
+											let CANames = "", CAStatus = "";
+											CADetails.CAAtt.forEach(item => {
+												CANames += ","+item.title;
+												CAStatus += ","+item.state;
+											});
+											classObject["CANames"] = CANames;
+											classObject["CAState"] = CAStatus;
+										})
+										.catch(error => {
+											console.error("Error fetching data:", error);
+										});
+									} else {
+										classObject[attItem.name.slice(3)] = attItem.value;
+									}
+									
 								});
 								AssignedClasses.classes.push(classObject);
 							}
