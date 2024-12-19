@@ -387,8 +387,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 									if(attItem.name.slice(3)==="FlowDownCA" && attItem.value) {
 										const flowDownCaId = attItem.value;
 										// call getCA details
-										comWidget.getCAData(flowDownCaId)
-										.then( CADetails => {
+										let CADetails = comWidget.getCAData(flowDownCaId);
 											classObject["MCOStatus"] = CADetails.MCOState;
 											let CANames = "", CAStatus = "";
 											CADetails.CAAtt.forEach(item => {
@@ -397,10 +396,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 											});
 											classObject["CANames"] = CANames;
 											classObject["CAState"] = CAStatus;
-										})
-										.catch(error => {
-											console.error("Error fetching data:", error);
-										});
+										
 									} else {
 										classObject[attItem.name.slice(3)] = attItem.value;
 									}
