@@ -365,6 +365,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						CADetails.CAAtt.push(CAData);
 					});
 					CADetails["MCOState"] = response.output.state;
+					CADetails["MCOTitle"] = response.output.title;
 					
 				}
 				return CADetails;	
@@ -389,6 +390,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 										// call getCA details
 										let CADetails = comWidget.getCAData(flowDownCaId);
 											classObject["MCOStatus"] = CADetails.MCOState;
+											classObject["MCOTitle"] = CADetails.MCOTitle;
 											let CANames = "", CAStatus = "";
 											CADetails.CAAtt.forEach(item => {
 												CANames += ","+item.title;
@@ -439,10 +441,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					return { id: index + 1, Plant: plantObject.title}}),comWidget.getAvaliablePlantTable(),"AvaliablePlantTable"));
 				
 					InitialAssignedClasses.classes.forEach((Plantclass,index) => {
-					const plantName = Plantclass.title.slice(6);
-					console.log("plantName-------->"+plantName);
-					ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change: "MCONAME", MFG_Status: "Create",Change:"CA-00000777", Change_Status:"In Work", Oracle_Template:Plantclass.oracletemplate, ERP_Status:"Active",ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", Sort_Value:""});
-				});
+						const plantName = Plantclass.title.slice(6);
+						console.log("plantName-------->"+plantName);
+						ClassTableData.push({id:index+1, Plant:Plantclass.title, Seq:"1",Status:"Current",MFG_Change:Plantclass.MCOTitle, MFG_Status: Plantclass.MCOStatus, Change: Plantclass.CANames, Change_Status: Plantclass.CAState, Oracle_Template:Plantclass.oracletemplate, ERP_Status:"Active",ERP_Export:Plantclass.ERPExport, Lead_Plant:Plantclass.LeadPlant, MBom:Plantclass.mbom ? "Make" : "Buy", Sort_Value:""});
+					});
 				console.log("ClassTableData-------->"+JSON.stringify(ClassTableData));
 				
 				mainDiv.appendChild(whereUsedTable.showTable(ClassTableData,comWidget.getAssignedPlantTable(),"AssigendPlantTable"));
