@@ -396,8 +396,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 												CANames += ","+item.title;
 												CAStatus += ","+item.state;
 											});
-											classObject["CANames"] = CANames;
-											classObject["CAState"] = CAStatus;
+											classObject["CANames"] = CANames.slice(1);
+											classObject["CAState"] = CAStatus.slice(1);
 										
 									} else {
 										classObject[attItem.name.slice(3)] = attItem.value;
