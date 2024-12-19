@@ -364,7 +364,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						}
 						CADetails.CAAtt.push(CAData);
 					});
-					CADetails["MCOState"] = response.state;
+					CADetails["MCOState"] = response.output.state;
 					
 				}
 				return CADetails;	
