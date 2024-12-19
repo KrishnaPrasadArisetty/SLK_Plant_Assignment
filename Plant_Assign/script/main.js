@@ -596,6 +596,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				}
 				//InitialAssignedClasses = comWidget.getAssignedClassDetails(sMainPartId);
 				console.log("InitialAssignedClasses--final----"+JSON.stringify(InitialAssignedClasses.classes));
+				alert("Data Saved Successfully");
 			},
 			propagateChilds : function(propdetails) {
 				let classifyBody = {}; 
