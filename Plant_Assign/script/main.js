@@ -49,7 +49,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								"responseMode":"objectsByPatterns",
 								"label":"ENXENG_AP-e1331143-1734517780491",
 								"ids":["60841A3F9E4720006763C55400218D53"]};
-					let respon = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(bd));
+					let respon = comWidget.callwebService("POST",url2,JSON.stringify(bd));
 					console.log("cbcbb----->"+respon.output);
 				}
 				
