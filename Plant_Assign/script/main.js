@@ -404,7 +404,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			getCAdetails: function(sCAId) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/";
 				urlObjWAF += sCAId;
-				urlObjWAF += "?$fields=getCAdetails,flowDown";
+				urlObjWAF += "?$fields=proposedChanges,flowDown";
 				console.log("urlObjWAF----"+urlObjWAF);
 				return comWidget.callwebService("GET",urlObjWAF,"");
 			},
