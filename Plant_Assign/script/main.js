@@ -3,7 +3,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		
 		var urlBASE,csrfToken,securityContext;
 		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses,productChilds;
-		var hasInWorkCA = false
+		var hasInWorkCA = false;
+		var partState = "";
 		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
@@ -60,10 +61,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let partName = dataResp3.member[0].name;
 						let partTitle = dataResp3.member[0].title;
 						let partCollabSpace  = dataResp3.member[0].collabspace;
+						partState  = dataResp3.member[0].state;
 						console.log("partName---->", partName);
 						console.log("partTitle---->", partTitle);
 						
-						hasInWorkCA = comWidget.checkInworkCA(PartId);
+						hasInWorkCA = comWidget.checkInworkCA(PartId,partState);
 						console.log("hasInWorkCA---->"+hasInWorkCA);
 						
 						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);						
@@ -85,7 +87,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				  };
 				return comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 			},
-			checkInworkCA : function(sPartid) {
+			checkInworkCA : function(sPartid,partState) {				
 				let resObejct = false;
 				let urlObjWAF = urlBASE+"resources/enorelnav/v2/navigate/setPreferences";
 				let body  = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
@@ -105,21 +107,30 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					let respon = comWidget.callwebService("POST",url2,JSON.stringify(bd));
 					if (respon.status) {
 						if(respon.output.objectsByPatterns.caproposedwhere_from){
+							//Iterate over CA's connected to object
 							respon.output.objectsByPatterns.caproposedwhere_from.forEach(itm => {
 								const status = itm["ds6w:status"].slice(14);
+								//check only not completed CA.. need to check if in appproval state also TBD
 								if(status !== "Complete") {
-									let sCAResult = comWidget.getCAdetails(itm.id);
-									if (sCAResult.status){
-										sCAResult.output.proposedChanges.forEach(obj => {
-											if (obj.where.identifier === sPartid) {
-												const action =obj.whats[0].what;
-												if(action==="Modify"){
-													resObejct = true;
+									if(partState==="RELEASED"){
+										let sCAResult = comWidget.getCAdetails(itm.id);
+										//get CA details and check if our part added as proposed item
+										if (sCAResult.status){
+											sCAResult.output.proposedChanges.forEach(obj => {
+												if (obj.where.identifier === sPartid) {
+													const action =obj.whats[0].what;
+													//check if action is modify if part is released...
+													if(action==="Modify"){
+														resObejct = true;
+													}
+													
 												}
-											}
-										});
+											});
+										}
+									} else {
+										resObejct = true;
 									}
-								}
+								} 
 								
 							});
 						}
@@ -129,24 +140,29 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return resObejct;
 			},
 			AddPlantPopup : function(){
-				let assignedTable = whereUsedTable.AssigendPlantTableData;
-				let allRows = assignedTable.getData();
-				let maxId = Math.max(...allRows.map(row => row.id)) + 1;
-				console.log("maxId===="+maxId);
-				let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
-				if (selectedRows.length > 0) {  // Check if any rows are selected
-				    selectedRows.forEach((row,index) => {
-				        let rowData = row.getData();
-							console.log("plant---->"+rowData.Plant);
-								assignedTable.addRow({ 
-									id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERP_Status:"Active",ERP_Export:"No", Lead_Plant:"false", MBom:"Buy", Sort_Value:""
-								});
-						row.delete();
-				    });
+				if(hasInWorkCA){
+					let assignedTable = whereUsedTable.AssigendPlantTableData;
+					let allRows = assignedTable.getData();
+					let maxId = Math.max(...allRows.map(row => row.id)) + 1;
+					console.log("maxId===="+maxId);
+					let selectedRows = whereUsedTable.AvaliablePlantTableData.getSelectedRows();
+					if (selectedRows.length > 0) {  // Check if any rows are selected
+						selectedRows.forEach((row,index) => {
+							let rowData = row.getData();
+								console.log("plant---->"+rowData.Plant);
+									assignedTable.addRow({ 
+										id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERP_Status:"Active",ERP_Export:"No", Lead_Plant:"false", MBom:"Buy", Sort_Value:""
+									});
+							row.delete();
+						});
+					} else {
+						alert("Please select at least one row from available plants");  // Show alert if no rows are selected
+					}
+				} else if(partState==="RELEASED"){
+					alert("No Modify CA connected to Product"); 
 				} else {
-				    alert("Please select at least one row from available plants");  // Show alert if no rows are selected
+					alert("No CA connected to Product"); 
 				}
-
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
 			{
