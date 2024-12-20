@@ -9,7 +9,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 
 
 		//------
-
+		console.log("krishna-Inside-1111111111111111111->");
 		var comWidget = {
 			onLoad: function() { 
 
