@@ -33,25 +33,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				comWidget.setBaseURL();
 
 				//==========
-				let urlObjWAF = urlBASE+"resources/enorelnav/v2/navigate/setPreferences";
-				let body  = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
-							"relations":["caproposedwhere_from","caproposedwhere_to","carealizedwhere_from","carealizedwhere_to"],
-							"allRelationsMode":false,
-							"publicationsMode":false,
-							"computeWithInstances":false,
-							"attributesForView":["ds6w:label","ds6wg:revision","ds6w:status","ds6w:type","ds6w:modified","ds6w:responsible","ds6w:project","ds6w:dataSource","ds6w:identifier"],
-							"label":"ENXENG_AP-e1331143-1734517777960","lang":"en","ghostMode":false};
-				let response = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
-				console.log("cbcbb----->"+response.output);
-				if (response.status) {
-					let url2 = urlBASE+"/resources/enorelnav/v2/navigate/getEcosystem";
-					let bd = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
-								"responseMode":"objectsByPatterns",
-								"label":"ENXENG_AP-e1331143-1734517780491",
-								"ids":["60841A3F9E4720006763C55400218D53"]};
-					let respon = comWidget.callwebService("POST",url2,JSON.stringify(bd));
-					console.log("cbcbb----->"+respon.output);
-				}
+				
 				
 				// Set up drag-and-drop functionality
 				var theInput = widget.body.querySelector('.mydropclass');
@@ -80,6 +62,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let partCollabSpace  = dataResp3.member[0].collabspace;
 						console.log("partName---->", partName);
 						console.log("partTitle---->", partTitle);
+
+						console.log("chekcCAAAA---->"+comWidget.checkInworkCA(PartId));
+						
 						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);						
 					},
 				});
@@ -98,6 +83,49 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					]
 				  };
 				return comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
+			},
+			checkInworkCA : function(sPartid) {
+				let resObejct = false;
+				let urlObjWAF = urlBASE+"resources/enorelnav/v2/navigate/setPreferences";
+				let body  = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
+							"relations":["caproposedwhere_from"],
+							"allRelationsMode":false,
+							"publicationsMode":false,
+							"computeWithInstances":false,
+							"attributesForView":["ds6w:status","ds6w:type","ds6w:identifier"],
+							"label":"ENXENG_AP-e1331143-1734517777960","lang":"en","ghostMode":false};
+				let response = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
+				if (response.status) {
+					let url2 = urlBASE+"/resources/enorelnav/v2/navigate/getEcosystem";
+					let bd = {"widgetId":"ENORIPE_Relations_Preview_2751_2038-15:33:22",
+								"responseMode":"objectsByPatterns",
+								"label":"ENXENG_AP-e1331143-1734517780491",
+								"ids":[sPartid]};
+					let respon = comWidget.callwebService("POST",url2,JSON.stringify(bd));
+					if (respon.status) {
+						if(respon.output.objectsByPatterns.caproposedwhere_from){
+							respon.output.objectsByPatterns.caproposedwhere_from.foreach(itm => {
+								const status = itm["ds6w:status"].slice(14);
+								if(status !== "Complete") {
+									let sCAResult = comWidget.getCAdetails(itm.id);
+									if (sCAResult.status){
+										sCAResult.output.proposedChanges.forEach(obj => {
+											if (obj.where.identifier === sPartid) {
+												const action =obj.whats[0].what;
+												if(action==="Modify"){
+													resObejct = true;
+												}
+											}
+										});
+									}
+								}
+								
+							});
+						}
+					}
+					
+				}
+				return resObejct;
 			},
 			AddPlantPopup : function(){
 				let assignedTable = whereUsedTable.AssigendPlantTableData;
