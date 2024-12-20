@@ -104,7 +104,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					let respon = comWidget.callwebService("POST",url2,JSON.stringify(bd));
 					if (respon.status) {
 						if(respon.output.objectsByPatterns.caproposedwhere_from){
-							respon.output.objectsByPatterns.caproposedwhere_from.foreach(itm => {
+							respon.output.objectsByPatterns.caproposedwhere_from.forEach(itm => {
 								const status = itm["ds6w:status"].slice(14);
 								if(status !== "Complete") {
 									let sCAResult = comWidget.getCAdetails(itm.id);
@@ -391,10 +391,20 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				urlObjWAF += "?$mask=dslib:ClassAttributesMask";
 				return LibClassDetails =comWidget.callwebService("GET",urlObjWAF,"");
 			},
+			searchCA :function(flowDownCaName){
+				let caID = "";
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/search?$searchStr=name:";
+				urlObjWAF += flowDownCaName;
+				let caResponse =comWidget.callwebService("GET",urlObjWAF,"");
+				if(caResponse.status){
+					caID = caResponse.output.changeAction[0].identifier;
+				}
+				return caID;
+			},
 			getCAdetails: function(sCAId) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/";
 				urlObjWAF += sCAId;
-				urlObjWAF += "?$fields=flowDown";
+				urlObjWAF += "?$fields=getCAdetails,flowDown";
 				console.log("urlObjWAF----"+urlObjWAF);
 				return comWidget.callwebService("GET",urlObjWAF,"");
 			},
@@ -436,9 +446,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								let classObject = {"id":allClass.id,"title":allClass.title};
 								classItem.Attributes.forEach(attItem => {
 									if(attItem.name.slice(3)==="FlowDownCA" && attItem.value) {
-										const flowDownCaId = attItem.value;
-										// call getCA details
-										let CADetails = comWidget.getCAData(flowDownCaId);
+										const flowDownCaName = attItem.value;
+										const flowDownCaId = comWidget.searchCA(flowDownCaName);
+										if(flowDownCaId){
+											// call getCA details
+											let CADetails = comWidget.getCAData(flowDownCaId);
 											classObject["MCOStatus"] = CADetails.MCOState;
 											classObject["MCOTitle"] = CADetails.MCOTitle;
 											let CANames = "", CAStatus = "";
@@ -448,6 +460,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 											});
 											classObject["CANames"] = CANames.slice(1);
 											classObject["CAState"] = CAStatus.slice(1);
+										}								
 										
 									} else {
 										classObject[attItem.name.slice(3)] = attItem.value;
