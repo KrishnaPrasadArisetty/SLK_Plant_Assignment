@@ -396,7 +396,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslc/changeaction/search?$searchStr=name:";
 				urlObjWAF += flowDownCaName;
 				let caResponse =comWidget.callwebService("GET",urlObjWAF,"");
-				if(caResponse.status){
+				if(caResponse.status && caResponse.output.changeAction){
 					caID = caResponse.output.changeAction[0].identifier;
 				}
 				return caID;
