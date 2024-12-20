@@ -3,7 +3,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		
 		var urlBASE,csrfToken,securityContext;
 		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses,productChilds;
-		
+		var hasInWorkCA = false
 		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
@@ -62,8 +62,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let partCollabSpace  = dataResp3.member[0].collabspace;
 						console.log("partName---->", partName);
 						console.log("partTitle---->", partTitle);
-
-						console.log("chekcCAAAA---->"+comWidget.checkInworkCA(PartId));
+						
+						hasInWorkCA = comWidget.checkInworkCA(PartId);
+						console.log("hasInWorkCA---->"+hasInWorkCA);
 						
 						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);						
 					},
