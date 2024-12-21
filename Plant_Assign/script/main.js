@@ -597,7 +597,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				} else {
 					alert("No CA connected to Product"); 
 				}
-
 			},
 			updateClassAttribuets : function(tableData) {
 				let updateditem = {};
