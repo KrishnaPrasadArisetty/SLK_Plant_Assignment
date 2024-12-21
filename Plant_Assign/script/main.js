@@ -373,7 +373,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return childs;
 			},
 			getLibClassDetails: function(sLibId) {
-				All = { "classes": [] };
+				AllclassesObject = [];
 				//Call web service--
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
@@ -391,7 +391,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								// Check for any further nested ChildClasses in each childClass
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
-									All.classes.push({"id":subChildClass.id,"title":subChildClass.title});
+									AllclassesObject.push({"id":subChildClass.id,"title":subChildClass.title});
 								});
 								}
 							});
@@ -399,8 +399,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						});
 					}
 				}
-				console.log("All:", All); 
-				return All;
+				console.log("AllclassesObject:", AllclassesObject); 
+				return AllclassesObject;
 			},
 			getClassAttributes: function(sClassId) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Class/";
@@ -496,7 +496,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = [];
-				ALLClasses = "";
+				ALLClasses = { "classes": [] };
 				 InitialAssignedClasses = "";
 				let uniqueInAllclasses = { "classes": [] };
 				//Need to update proper Collbspace anme in future
@@ -506,7 +506,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output;
 					const sLibId = lib_Details.member[0].id;
-					ALLClasses = comWidget.getLibClassDetails(sLibId);
+					ALLClasses.classes.push(comWidget.getLibClassDetails(sLibId));
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
 				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
