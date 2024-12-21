@@ -373,7 +373,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return childs;
 			},
 			getLibClassDetails: function(sLibId) {
-				ALLClasses = { "classes": [] };
+				All = { "classes": [] };
 				//Call web service--
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/";
 				urlObjWAF += sLibId;
@@ -391,7 +391,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								// Check for any further nested ChildClasses in each childClass
 								if (childClass.ChildClasses && childClass.ChildClasses.member) {
 								childClass.ChildClasses.member.forEach(subChildClass => {
-									ALLClasses.classes.push({"id":subChildClass.id,"title":subChildClass.title});
+									All.classes.push({"id":subChildClass.id,"title":subChildClass.title});
 								});
 								}
 							});
@@ -399,8 +399,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						});
 					}
 				}
-				console.log("ALLClasses:", ALLClasses); 
-				return ALLClasses;
+				console.log("All:", All); 
+				return All;
 			},
 			getClassAttributes: function(sClassId) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Class/";
@@ -496,7 +496,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = [];
-				let ALLClasses = "";
+				ALLClasses = "";
 				 InitialAssignedClasses = "";
 				let uniqueInAllclasses = { "classes": [] };
 				//Need to update proper Collbspace anme in future
