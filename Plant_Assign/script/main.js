@@ -506,8 +506,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output;
 					const sLibId = lib_Details.member[0].id;
-					//ALLClasses.classes.push(comWidget.getLibClassDetails(sLibId));
-					ALLClasses['classes'].extend(comWidget.getLibClassDetails(sLibId));
+					ALLClasses.classes.push(...comWidget.getLibClassDetails(sLibId));
+					//ALLClasses['classes'].extend(comWidget.getLibClassDetails(sLibId));
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
 				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
