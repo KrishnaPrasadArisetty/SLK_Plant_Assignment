@@ -159,9 +159,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						alert("Please select at least one row from available plants");  // Show alert if no rows are selected
 					}
 				} else if(partState==="RELEASED"){
-					alert("No Modify CA connected to Product"); 
+					alert("Change Action is required to assign plants to Product, please assign Modify change Action and try again"); 
 				} else {
-					alert("No CA connected to Product"); 
+					alert("Change Action is required to assign plants to Product, please assign change Action and try again"); 
 				}
 			},
 			callwebService: function(methodWAF,urlObjWAF,data) 
@@ -594,9 +594,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						comWidget.updateClassAttribuets(tableData);
 					}
 				} else if(partState==="RELEASED"){
-					alert("No Modify CA connected to Product"); 
+					alert("Change Action is required to update, please assign Modify change Action and try again"); 
 				} else {
-					alert("No CA connected to Product"); 
+					alert("Change Action is required to update, please assign change Action and try again"); 
 				}
 			},
 			updateClassAttribuets : function(tableData) {
