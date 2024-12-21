@@ -493,6 +493,21 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				}
 				return AssignedClasses;
 			},
+			getUserGroup : function(sPartId){
+				let userGroup = [];
+				let urlObjWAF = urlBASE+"resources/pno/ownership";
+				const body  = { "businessObject": [{"objectID":sPartId}]};
+				let groupDetails =comWidget.callwebService("GET",urlObjWAF,JSON.stringify(body));
+				if(groupDetails.status){
+					groupDetails.output.ownershipVector[0].ownership.forEach(itm => {
+						let access = itm.access.logical;
+						let groupName = itm.owner.group.groupTitle;
+						userGroup.push({"GroupName" : groupName, "Access":access});
+					});
+				}
+				console.log("userGroup=====>"+JSON.stringify(userGroup));
+				return userGroup;
+			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
 				let ClassTableData = [];
@@ -506,10 +521,13 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				if(LibDetails.status) {
 					const lib_Details = LibDetails.output;
 					const sLibId = lib_Details.member[0].id;
-					ALLClasses.classes.push(...comWidget.getLibClassDetails(sLibId));
-					//ALLClasses['classes'].extend(comWidget.getLibClassDetails(sLibId));
+					ALLClasses.classes.push(...comWidget.getLibClassDetails(sLibId));					
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
+
+				//get user Group and there classes alsointo All classes
+
+
 				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 				console.log("InitialAssignedClasses--:", InitialAssignedClasses); 
 
