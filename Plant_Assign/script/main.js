@@ -526,7 +526,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				}
 
 				//get user Group and there classes alsointo All classes
-
+				console.log("UserGroup==----->", comWidget.getUserGroup(sPartId)); 
 
 				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 				console.log("InitialAssignedClasses--:", InitialAssignedClasses); 
