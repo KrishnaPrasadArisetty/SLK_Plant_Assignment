@@ -582,14 +582,20 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				return columns;
 			},
 			SaveData : function (){
-				let tableData = { "classes" : [] }
-				let assignedTable = whereUsedTable.AssigendPlantTableData;
-				assignedTable.getRows().forEach(row => {
-					tableData.classes.push(row.getData());
-				});
-				console.log("tableData --->"+JSON.stringify(tableData));
-				if(tableData.classes){
-					comWidget.updateClassAttribuets(tableData);
+				if(hasInWorkCA) {
+					let tableData = { "classes" : [] }
+					let assignedTable = whereUsedTable.AssigendPlantTableData;
+					assignedTable.getRows().forEach(row => {
+						tableData.classes.push(row.getData());
+					});
+					console.log("tableData --->"+JSON.stringify(tableData));
+					if(tableData.classes){
+						comWidget.updateClassAttribuets(tableData);
+					}
+				} else if(partState==="RELEASED"){
+					alert("No Modify CA connected to Product"); 
+				} else {
+					alert("No CA connected to Product"); 
 				}
 
 			},
