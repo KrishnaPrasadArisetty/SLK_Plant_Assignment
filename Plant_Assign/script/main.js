@@ -151,7 +151,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 							let rowData = row.getData();
 								console.log("plant---->"+rowData.Plant);
 									assignedTable.addRow({ 
-										id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERP_Status:"Active",ERP_Export:"No", Lead_Plant:"false", MBom:"Buy", Sort_Value:""
+										id: maxId+index, Plant: rowData.Plant, Seq:"1",Status:"Current",MFG_Change: "", MFG_Status: "",Change:"", Change_Status:"", Oracle_Template:"", ERP_Status:"Active",ERP_Export:"No", Lead_Plant:"false", MBom:"Buy", Sort_Value:""
 									});
 							row.delete();
 						});
