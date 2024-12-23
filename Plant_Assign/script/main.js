@@ -497,7 +497,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let userGroup = [];
 				let urlObjWAF = urlBASE+"resources/pno/ownership";
 				const body  = { "businessObject": [{"objectID":sPartId}]};
-				let groupDetails =comWidget.callwebService("GET",urlObjWAF,JSON.stringify(body));
+				let groupDetails =comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				if(groupDetails.status){
 					groupDetails.output.ownershipVector[0].ownership.forEach(itm => {
 						let access = itm.access.logical;
