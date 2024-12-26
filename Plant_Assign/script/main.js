@@ -502,11 +502,27 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					groupDetails.output.ownershipVector[0].ownership.forEach(itm => {
 						let access = itm.access.logical;
 						let groupName = itm.owner.group.groupTitle;
+						if ( groupName == "Author") {
+							comWidget.getLibraryclassDetails(groupName);
+						}						
 						userGroup.push({"GroupName" : groupName, "Access":access});
 					});
 				}
 				console.log("userGroup=====>"+JSON.stringify(userGroup));
 				return userGroup;
+			},
+			getLibraryclassDetails :function(searchString){
+				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr="+searchString;
+				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
+				if(LibDetails.status) {
+					LibDetails.output.forEach(item => {
+						if (item.title === searchString ){
+							ALLClasses.classes.push(...comWidget.getLibClassDetails(item.id));	
+						}
+					});					
+					console.log("ALLClasses---classess--insideliab:", ALLClasses.classes); 
+				}
+
 			},
 			classTable: function(sPartId,partCollabSpace,mainDiv) {
 				console.log("Creating class table for PartId:", sPartId);
@@ -514,8 +530,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				ALLClasses = { "classes": [] };
 				 InitialAssignedClasses = "";
 				let uniqueInAllclasses = { "classes": [] };
+				//getLibraryclassDetails
 				//Need to update proper Collbspace anme in future
 				//Here searchstr is Library description need to update and fix furthur
+				comWidget.getLibraryclassDetails(partCollabSpace);
+				/*
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr=Library_MM";
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
 				if(LibDetails.status) {
@@ -524,9 +543,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ALLClasses.classes.push(...comWidget.getLibClassDetails(sLibId));					
 					console.log("ALLClasses---classess--:", ALLClasses.classes); 
 				}
+				*/
 
-				//get user Group and there classes alsointo All classes
-				//console.log("UserGroup==----->", comWidget.getUserGroup(sPartId)); 
+				//get user Group and there classes alsointo All classes				
+				let userGroup = comWidget.getUserGroup(sPartId);
+				console.log("UserGroup==----->", +userGroup);
 
 				InitialAssignedClasses = comWidget.getAssignedClassDetails(sPartId);
 				console.log("InitialAssignedClasses--:", InitialAssignedClasses); 
