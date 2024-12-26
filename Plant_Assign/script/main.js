@@ -502,7 +502,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					groupDetails.output.ownershipVector[0].ownership.forEach(itm => {
 						let access = itm.access.logical;
 						let groupName = itm.owner.group.groupTitle;
-						if ( groupName == "Author") {
+						if ( access == "Author") {
 							comWidget.getLibraryclassDetails(groupName);
 						}						
 						userGroup.push({"GroupName" : groupName, "Access":access});
@@ -515,7 +515,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:Library/search?$searchStr="+searchString;
 				let LibDetails =comWidget.callwebService("GET",urlObjWAF,"");
 				if(LibDetails.status) {
-					LibDetails.output.forEach(item => {
+					LibDetails.output.member.forEach(item => {
 						if (item.title === searchString ){
 							ALLClasses.classes.push(...comWidget.getLibClassDetails(item.id));	
 						}
