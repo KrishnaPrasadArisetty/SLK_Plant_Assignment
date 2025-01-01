@@ -383,7 +383,9 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
 				let childDetails = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				let childs = childDetails.output.member
-					.filter(member => (member.type === "VPMReference" || member.type === "Raw_Material" ) && member.id !== sMainPartId ).map(member => member.id);
+					.filter(member => (member.type === "VPMReference" || member.type === "Raw_Material" ) && member.id !== sMainPartId )
+					//.map(member => member.id);
+					.map(member => ({ id: member.id, type: member.type }));
 				return childs;
 			},
 			getLibClassDetails: function(sLibId) {
@@ -741,11 +743,16 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let classifyBody = {}; 
 				propdetails.forEach(classitems =>{
 					let classifyBody = {"ClassID": classitems, "ObjectsToClassify": []};
-					let prodbodyTemplate ={"source": urlBASE.slice(0, -1),"type": "VPMReference"};
-					productChilds.forEach(prodid =>{
-						let prodbody = {...prodbodyTemplate};
-						prodbody["identifier"] = prodid;
-						prodbody["relativePath"] = "/resources/v1/modeler/dseng/dseng:EngItem/"+prodid;
+					//let prodbodyTemplate ={"source": urlBASE.slice(0, -1),"type": "VPMReference"};
+					productChilds.forEach(prod =>{
+						let prodbody = {"source": urlBASE.slice(0, -1)};
+						prodbody["identifier"] = prod.id;
+						prodbody["type"] = prod.type;
+						if (prod.type == "VPMReference") {
+							prodbody["relativePath"] = "/resources/v1/modeler/dseng/dseng:EngItem/"+prod.id;						
+						} else {
+							prodbody["relativePath"] = "/resources/v1/modeler/dsrm/dsrm:RawMaterial/"+prod.id;	
+						}
 						classifyBody.ObjectsToClassify.push(prodbody);
 					});
 					console.log("classifyBody----"+JSON.stringify(classifyBody));
