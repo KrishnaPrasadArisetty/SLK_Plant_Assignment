@@ -364,8 +364,10 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				widget.body.appendChild(container);
 				
 				// call get Prod childs
-				productChilds = comWidget.getChildParts()
-				console.log("productChilds----"+productChilds);
+				if ("VPMReference" == ProductType  ) {
+					productChilds = comWidget.getChildParts();
+					console.log("productChilds----"+productChilds);
+				}
 			},
 			getChildParts: function() {
 				
@@ -719,7 +721,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								propdetails.push(matchingEntry.id);
 							}
 						});
-						if (propdetails){
+						if (propdetails && "VPMReference" == ProductType ){
 							//call propogate Method
 							comWidget.propagateChilds(propdetails);
 						}
