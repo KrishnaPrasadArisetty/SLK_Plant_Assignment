@@ -2,6 +2,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 	function(DataDragAndDrop, PlatformAPI, WAFData, BaseUrl,whereUsedTable) {
 		
 		var urlBASE,csrfToken,securityContext;
+		var ProductType
 		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses,productChilds;
 		var hasInWorkCA = false;
 		var partState = "";
@@ -49,11 +50,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						}
 						const PartId = objList[0].objectId;
 						sMainPartId = PartId;
-						const ProductType = objList[0].objectType;
+						ProductType = objList[0].objectType;
 						console.log("objectType---->", objectType);
 						console.log("objList---->", objList);
-						if ("VPMReference"!=ProductType) {
-							alert("Please drop only Products");
+						if ("VPMReference"!=ProductType && "Raw_Material"!=ProductType ) {
+							alert("Please drop only Physical Products or Raw Materials");
 							return;
 						}
 						console.log("PartId dropped:", PartId);	
@@ -272,8 +273,11 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				var methodWAF = "GET";
 				// Web Service for getting Test Case Object Detail
 				var urlObjWAF = urlBASE+"resources/v1/modeler/dseng/dseng:EngItem/";
+				if (ProductType == "Raw_Material") {
+					urlObjWAF = urlBASE+"resources/v1/modeler/dsrm/dsrm:RawMaterial/";
+				}
 				urlObjWAF += PartId;
-				urlObjWAF += "?$mask=dsmveng:EngItemMask.Details";
+				//urlObjWAF += "?$mask=dsmveng:EngItemMask.Details";
 				var dataRespTC;
 				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
 					method: methodWAF,
