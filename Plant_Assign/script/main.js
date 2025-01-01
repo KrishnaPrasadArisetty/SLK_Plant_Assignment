@@ -383,7 +383,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let body  = {"expandDepth": 1,"type_filter_bo": ["VPMReference"],"type_filter_rel": ["VPMInstance"]};
 				let childDetails = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				let childs = childDetails.output.member
-					.filter(member => member.type === "VPMReference" && member.id !== sMainPartId ).map(member => member.id);
+					.filter(member => (member.type === "VPMReference" || member.type === "Raw_Material" ) && member.id !== sMainPartId ).map(member => member.id);
 				return childs;
 			},
 			getLibClassDetails: function(sLibId) {
