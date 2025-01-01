@@ -51,7 +51,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						const PartId = objList[0].objectId;
 						sMainPartId = PartId;
 						ProductType = objList[0].objectType;
-						console.log("objectType---->", objectType);
+						console.log("objectType---->", ProductType);
 						console.log("objList---->", objList);
 						if ("VPMReference"!=ProductType && "Raw_Material"!=ProductType ) {
 							alert("Please drop only Physical Products or Raw Materials");
