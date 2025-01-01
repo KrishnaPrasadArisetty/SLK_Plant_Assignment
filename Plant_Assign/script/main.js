@@ -50,6 +50,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						const PartId = objList[0].objectId;
 						sMainPartId = PartId;
 						const ProductType = objList[0].objectType;
+						console.log("objectType---->", objectType);
+						console.log("objList---->", objList);
 						if ("VPMReference"!=ProductType) {
 							alert("Please drop only Products");
 							return;
