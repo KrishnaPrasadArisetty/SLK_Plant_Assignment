@@ -643,7 +643,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						tableData.classes.push(row.getData());
 					});
 					console.log("tableData --->"+JSON.stringify(tableData));
-					if(tableData.classes){
+					if(tableData.classes.length > 0 ){
 						comWidget.updateClassAttribuets(tableData);
 					}
 				} else if(partState==="RELEASED"){
@@ -750,7 +750,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					});
 					console.log("classifyBody----"+JSON.stringify(classifyBody));
 					//call prod classfiywebservice
-					if(classifyBody.ObjectsToClassify){
+					if(classifyBody.ObjectsToClassify.length > 0 ){
 						let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";				
 						let response =  comWidget.callwebService("POST",urlObjWAF,JSON.stringify(classifyBody));
 					}
