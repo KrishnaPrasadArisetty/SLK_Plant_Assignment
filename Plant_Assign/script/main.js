@@ -77,14 +77,20 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 			},
 			classifyProduct : function(sClassId,sPartid) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
+				let stype = "VPMReference";
+				let sRefPath = "/resources/v1/modeler/dseng/dseng:EngItem/";
+				if ( "Raw_Material" == ProductType ) {
+					stype = "Raw_Material";
+					sRefPath = "/resources/v1/modeler/dsrm/dsrm:RawMaterial/";
+				}
 				let body = {
 					"ClassID": sClassId,
 					"ObjectsToClassify": [
 					  {
 						"source": urlBASE.slice(0, -1),
-						"type": "VPMReference",
+						"type": stype,
 						"identifier": sPartid,
-						"relativePath": "/resources/v1/modeler/dseng/dseng:EngItem/"+sPartid
+						"relativePath": sRefPath+sPartid
 					  }
 					]
 				  };
@@ -683,7 +689,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						// call classify product to class..nnnnn
 						const result = comWidget.classifyProduct(classid,sMainPartId);
 
-						if(result.status){								
+						if(result.status){							
 								//call is success prepare attributes update							
 							if(tableitem.ERP_Export){
 								updateditem[plantName+"ERPExport"] = tableitem.ERP_Export;
