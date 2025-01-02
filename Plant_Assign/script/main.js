@@ -60,7 +60,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						console.log("PartId dropped:", PartId);	
 						var dataResp3 = comWidget.getPartDetails(PartId);
 						console.log("dataResp3---->", dataResp3);
-						
 						let partName = dataResp3.member[0].name;
 						let partTitle = dataResp3.member[0].title;
 						let partCollabSpace  = dataResp3.member[0].collabspace;
