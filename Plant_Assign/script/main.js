@@ -122,6 +122,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 								//check only not completed CA.. need to check if in appproval state also TBD
 								if(status !== "Complete") {
 									if(partState==="RELEASED"){
+										/*
 										let sCAResult = comWidget.getCAdetails(itm.id);
 										//get CA details and check if our part added as proposed item
 										if (sCAResult.status){
@@ -136,6 +137,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 												}
 											});
 										}
+										*/
 									} else {
 										resObejct = true;
 									}
@@ -168,7 +170,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						alert("Please select at least one row from available plants");  // Show alert if no rows are selected
 					}
 				} else if(partState==="RELEASED"){
-					alert("Change Action is required to assign plants to Product, please assign Modify change Action and try again"); 
+					//alert("Change Action is required to assign plants to Product, please assign Modify change Action and try again");
+					alert("Cannot add plants for Released Items"); 
 				} else {
 					alert("Change Action is required to assign plants to Product, please assign change Action and try again"); 
 				}
@@ -649,7 +652,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						comWidget.updateClassAttribuets(tableData);
 					}
 				} else if(partState==="RELEASED"){
-					alert("Change Action is required to update, please assign Modify change Action and try again"); 
+					//alert("Change Action is required to update, please assign Modify change Action and try again"); 
+					alert("Cannot Update details for Released Items"); 
 				} else {
 					alert("Change Action is required to update, please assign change Action and try again"); 
 				}
