@@ -386,7 +386,6 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				let childDetails = comWidget.callwebService("POST",urlObjWAF,JSON.stringify(body));
 				let childs = childDetails.output.member
 					.filter(member => (member.type === "VPMReference" || member.type === "Raw_Material" ) && member.id !== sMainPartId )
-					//.map(member => member.id);
 					.map(member => ({ id: member.id, type: member.type }));
 				return childs;
 			},
