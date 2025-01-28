@@ -108,7 +108,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}
 
 				}
-				widget.addPreference(securitycontextpreference);
+				widget.addPreference(securitycontextpreference);				
+				securityContext = widget.getValue("Credentials");
 			},
 			classifyProduct : function(sClassId,sPartid) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
@@ -274,8 +275,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						//urlBASE = "https://oi000186152-us1-space.3dexperience.3ds.com/enovia/";
 						console.log("aaaaaaaaaaaaaaaaa-1111-----URL",urlBASE);
 						comWidget.setCSRF();
-						comWidget.getSecurityContextPreference();
-						securityContext = widget.getValue("Credentials");
+						
 					},
 					onFailure:  function( ) { alert("Something Went Wrong");
 					}
@@ -300,6 +300,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						let csrfArr=dataResp["csrf"];
 						csrfToken = csrfArr["value"];
 						console.log("aaaaaaaaaaaaaaaaa------csrfToken",csrfToken);
+						comWidget.getSecurityContextPreference();
 					},
 					onFailure: function(error) {
 						widget.body.innerHTML += "<p>Something Went Wrong- "+error+"</p>";
