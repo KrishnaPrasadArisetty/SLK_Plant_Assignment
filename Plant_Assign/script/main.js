@@ -9,7 +9,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
 		urlBASE = "";
 
-
+ 
 		//------
 		console.log("krishna-Inside-1111111111111111111->");
 		var comWidget = {
@@ -33,7 +33,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				dropbox.inject(widget.body);
 				//
 				comWidget.setBaseURL();
-
+				comWidget.getSecurityContextPreference();
+				securityContext = widget.getValue("Credentials");
 				//==========
 				
 				
@@ -73,6 +74,42 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						comWidget.partDropped(PartId,partName,partTitle,partCollabSpace);						
 					},
 				});
+			},
+			getSecurityContextPreference : function() {
+				let securitycontextpreference = {
+                    name: "Credentials",
+                    type: "list",
+                    label: "Credentials",
+                    options: [],
+                    defaultValue: "",
+                };
+				let urlObjWAF = urlBASE+"resources/modeler/pno/person?current=true&select=collabspaces&select=preferredcredentials&select=email";
+				let response = comWidget.callwebService("GET",urlObjWAF,"");
+				if (response.status) { 
+					if(response.output.collabspaces){
+						response.output.collabspaces.forEach((collabspace) => {
+							let organization = collabspace.name.trim();
+							let couples = collabspace.couples;
+							couples.forEach((couple) => {
+								//MSOL-Micro Motion ● Measurement Solutions ● Leader
+								const SecurityContextStr = couple.role.name + "." + couple.organization.name + "." + organization;
+								const SecurityContextLbl = organization.replace("MSOL-","") + " ● " + couple.organization.title + " ● " + couple.role.nls
+								securitycontextpreference.options.push({
+									value: SecurityContextStr,
+									label: SecurityContextLbl
+								});
+	   
+							})
+						});
+					}
+					if(response.output.preferredcredentials){
+						const preferredCredentials = response.output.preferredcredentials;
+						const defaultOption = `${preferredCredentials.collabspace.name}.${preferredCredentials.organization.name}.${preferredCredentials.role.name}`;
+						securitycontextpreference.defaultValue = defaultOption;
+					}
+
+				}
+				widget.addPreference(securitycontextpreference);
 			},
 			classifyProduct : function(sClassId,sPartid) {
 				let urlObjWAF = urlBASE+"resources/v1/modeler/dslib/dslib:ClassifiedItem";
