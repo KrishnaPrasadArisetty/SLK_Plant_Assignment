@@ -6,7 +6,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 		var sMainPartId,InitialAssignedClasses,cestamp,ALLClasses,productChilds;
 		var hasInWorkCA = false;
 		var partState = "";
-		securityContext= "ctx%3A%3AVPLMProjectAdministrator.BU-0000001.Micro%20Motion",
+		securityContext= "",
 		urlBASE = "";
 
  
