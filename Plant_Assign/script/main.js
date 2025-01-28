@@ -103,7 +103,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					}
 					if(response.output.preferredcredentials){
 						const preferredCredentials = response.output.preferredcredentials;
-						const defaultOption = `${preferredCredentials.collabspace.name}.${preferredCredentials.organization.name}.${preferredCredentials.role.name}`;
+						const defaultOption = `${preferredCredentials.role.name}.${preferredCredentials.organization.name}.${preferredCredentials.collabspace.name}`;
 						securitycontextpreference.defaultValue = defaultOption;
 					}
 
