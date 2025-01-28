@@ -33,8 +33,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 				dropbox.inject(widget.body);
 				//
 				comWidget.setBaseURL();
-				comWidget.getSecurityContextPreference();
-				securityContext = widget.getValue("Credentials");
+				
 				//==========
 				
 				
@@ -275,6 +274,8 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 						//urlBASE = "https://oi000186152-us1-space.3dexperience.3ds.com/enovia/";
 						console.log("aaaaaaaaaaaaaaaaa-1111-----URL",urlBASE);
 						comWidget.setCSRF();
+						comWidget.getSecurityContextPreference();
+						securityContext = widget.getValue("Credentials");
 					},
 					onFailure:  function( ) { alert("Something Went Wrong");
 					}
