@@ -220,7 +220,7 @@ require(["DS/DataDragAndDrop/DataDragAndDrop", "DS/PlatformAPI/PlatformAPI", "DS
 					ENO_CSRF_TOKEN : csrfToken,
 					"Content-Type": "application/json"
 				};
-				console.log("headerWAF----"+headerWAF);
+				console.log("headerWAF----"+JSON.stringify(headerWAF));
 				let returnobj = {};
 				let dataResp=WAFData.authenticatedRequest(urlObjWAF, {
 					method: methodWAF,
